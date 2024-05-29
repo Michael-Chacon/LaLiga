@@ -13,8 +13,8 @@ public class Main {
 
         principal: while(true){
 //
-            System.out.println("Welcome to La Liga");
-            System.out.println("Options: \n\t1. Register team\n\t2. Register match\n\t3. Informes\n\t4. Tabla\n\t0. Exist\n");
+            System.out.println("LA LIGA");
+            System.out.println("Options: \n\t1. Registrar equipo\n\t2. Registrar juego\n\t3. Informes\n\t4. Tabla\n\t0. Salir");
             control = sc.nextInt();
 
             if (control == 1){
@@ -24,9 +24,9 @@ public class Main {
                     System.out.println("Ingrese el nombre del equipo");
                     String nombre = sc.next();
                     repo.crear(new Equipo(id, nombre, 0,0,0,0,0,0,0));
-                    System.out.println("o para ingresar otro. x para salir");
+                    System.out.println("quieres registrar otro equipo?\n\ts para salir\n\tp para registra otro equipo");
                     String option = sc.next();
-                    if (option.equals("x")){
+                    if (option.equalsIgnoreCase("s")){
                         break registro;
                     }
                 }
@@ -54,21 +54,12 @@ public class Main {
                 System.out.println("Cuantos goles hizo " + equipoVisitante.getNombre()+ ": ");
                 int golesVisitante = sc.nextInt();
 
-                System.out.println("Ingrese la fecha del juego en formato yyyy-MM-dd: ");
-                String fecha = sc.next();
-                String fechaValida = Utils.formatearFecha(fecha);
                 if (golesLocal > golesVisitante || golesLocal == golesVisitante) {
                     repo.registraCombate(equipoLocal, equipoVisitante, golesLocal, golesVisitante);
                 }else{
                     repo.registraCombate(equipoVisitante, equipoLocal, golesVisitante, golesLocal);
                 }
-//                match: while (true){
-//                    System.out.println("o para ingresar otro. x para salir");
-//                    String option = sc.next();
-//                    if (option.equals("x")){
-//                        break match;
-//                    }
-//                }
+//
             } else if (control == 3) {
                 System.out.println("Modulo de informes");
                 informes: while (true){
@@ -94,7 +85,7 @@ public class Main {
 
                     System.out.println("quieres seguir viendo más informes?\n\ts para salir\n\tp para seguir viendo informes");
                     String option = sc.next();
-                    if (option.equals("s")){
+                    if (option.equalsIgnoreCase("s")){
                         break informes;
                     }
                 }
