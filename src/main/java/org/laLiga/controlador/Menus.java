@@ -17,9 +17,9 @@ public class Menus {
             System.out.println("Ingrese el nombre del equipo");
             String nombre = sc.next();
             repo.crear(new Equipo(id, nombre, 0,0,0,0,0,0,0));
-            System.out.println("quieres registrar otro equipo?\n\ts para salir\n\tp para registra otro equipo");
+            System.out.println("quieres registrar otro equipo?(y/n)");
             String option = sc.next();
-            if (option.equalsIgnoreCase("s")){
+            if (option.equalsIgnoreCase("n")){
                 break registro;
             }
         }
@@ -68,36 +68,45 @@ public class Menus {
     }
 
     public void informes(){
-        Informes informe = new Informes();
-        System.out.println("Modulo de informes");
+        List<Equipo> obtenerEquipos = repo.listar();
+        int totalEquipos = obtenerEquipos.size();
+        if (totalEquipos < 1){
+            System.out.println("\n-------------------------------------------------------");
+            System.out.println("** No hay suficientes equipos para iniciar el torneo **");
+            System.out.println("-------------------------------------------------------\n");
+        }else{
+            Informes informe = new Informes();
+            System.out.println("Modulo de informes");
 
-        informes: while (true){
-            System.out.println("Seleccione el informe que quiere ver:\n\t1. Equipo más goleador\n\t2. Equipo con más Puntos" +
-                    "\n\t3. Equipo con más partidos ganados\n\t4. Total de goles anotados por todos\n\t5. Promedio de goles anotados");
-            int informeSeleccionado = sc.nextInt();
-            if (informeSeleccionado == 1){
-                Equipo mejor = informe.masGoles(repo.listar());
-                System.out.println("El " + mejor.getNombre() + " tiene " + mejor.getGf() + " goles");
-            } else if (informeSeleccionado == 2) {
-                Equipo puntos = informe.masPuntos(repo.listar());
-                System.out.println("El " + puntos.getNombre() + " tiene " + puntos.getTp() + " puntos");
-            } else if (informeSeleccionado == 3) {
-                Equipo partidos = informe.masPartidosGanados(repo.listar());
-                System.out.println("El " + partidos.getNombre() + " tiene " + partidos.getPg() + " partidos");
-            } else if (informeSeleccionado == 4) {
-                int goles = informe.totalGoles(repo.listar());
-                System.out.println("El torneo tuvo " + goles + " goles");
-            } else if (informeSeleccionado == 5) {
-                float promedio = informe.promedio(repo.listar());
-                System.out.println("El torneo tuvo un promedio de " + promedio + " goles por equipo");
-            }
+            informes: while (true){
+                System.out.println("Seleccione el informe que quiere ver:\n\t1. Equipo más goleador\n\t2. Equipo con más Puntos" +
+                        "\n\t3. Equipo con más partidos ganados\n\t4. Total de goles anotados por todos\n\t5. Promedio de goles anotados");
+                int informeSeleccionado = sc.nextInt();
+                if (informeSeleccionado == 1){
+                    Equipo mejor = informe.masGoles(repo.listar());
+                    System.out.println("El " + mejor.getNombre() + " tiene " + mejor.getGf() + " goles");
+                } else if (informeSeleccionado == 2) {
+                    Equipo puntos = informe.masPuntos(repo.listar());
+                    System.out.println("El " + puntos.getNombre() + " tiene " + puntos.getTp() + " puntos");
+                } else if (informeSeleccionado == 3) {
+                    Equipo partidos = informe.masPartidosGanados(repo.listar());
+                    System.out.println("El " + partidos.getNombre() + " tiene " + partidos.getPg() + " partidos");
+                } else if (informeSeleccionado == 4) {
+                    int goles = informe.totalGoles(repo.listar());
+                    System.out.println("El torneo tuvo " + goles + " goles");
+                } else if (informeSeleccionado == 5) {
+                    float promedio = informe.promedio(repo.listar());
+                    System.out.println("El torneo tuvo un promedio de " + promedio + " goles por equipo");
+                }
 
-            System.out.println("quieres seguir viendo más informes?\n\ts para salir\n\tp para seguir viendo informes");
-            String option = sc.next();
-            if (option.equalsIgnoreCase("s")){
-                break informes;
+                System.out.println("quieres seguir viendo más informes? (y/n)");
+                String option = sc.next();
+                if (option.equalsIgnoreCase("n")){
+                    break informes;
+                }
             }
         }
+
     }
 
     public void mostrarEquipos(){
