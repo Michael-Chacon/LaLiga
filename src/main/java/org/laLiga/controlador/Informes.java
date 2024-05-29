@@ -43,10 +43,10 @@ public class Informes {
         return total;
     }
 
-    public int promedio(List<Equipo> arrayEquipos){
+    public float promedio(List<Equipo> arrayEquipos){
         int totalEquipos = arrayEquipos.size();
         int totalGoles = this.totalGoles(arrayEquipos);
-        int total = totalGoles/totalEquipos;
+        float total = totalGoles/totalEquipos;
         return total;
     }
 }
