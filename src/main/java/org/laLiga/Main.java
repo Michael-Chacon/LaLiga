@@ -1,5 +1,6 @@
 package org.laLiga;
 import org.laLiga.controlador.AdministrarEquipo;
+import org.laLiga.controlador.Informes;
 import org.laLiga.modelo.Equipo;
 
 import java.sql.SQLOutput;
@@ -12,6 +13,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 //        La clase AdministrarEquipo contiene los crud requeridos.
         AdministrarEquipo repo = new AdministrarEquipo();
+        Informes informe = new Informes();
 
         int control = 0;
 
@@ -86,21 +88,21 @@ public class Main {
                 informes: while (true){
                     System.out.println("Seleccione el informe que quiere ver:\n\t1. Equipo más goleador\n\t2. Equipo con más Puntos" +
                             "\n\t3. Equipo con más partidos ganados\n\t4. Total de goles anotados por todos\n\t5. Promedio de goles anotados");
-                    int informe = sc.nextInt();
-                    if (informe == 1){
-                        Equipo mejor = repo.estadisticas("goles", repo.listar());
+                    int informeSeleccionado = sc.nextInt();
+                    if (informeSeleccionado == 1){
+                        Equipo mejor = informe.masGoles(repo.listar());
                         System.out.println("El " + mejor.getNombre() + " tiene " + mejor.getGf() + " goles");
-                    } else if (informe == 2) {
-                        Equipo puntos = repo.estadisticas("puntos", repo.listar());
+                    } else if (informeSeleccionado == 2) {
+                        Equipo puntos = informe.masPuntos(repo.listar());
                         System.out.println("El " + puntos.getNombre() + " tiene " + puntos.getTp() + " puntos");
-                    } else if (informe == 3) {
-                        Equipo partidos = repo.estadisticas("partidos", repo.listar());
+                    } else if (informeSeleccionado == 3) {
+                        Equipo partidos = informe.masPartidosGanados(repo.listar());
                         System.out.println("El " + partidos.getNombre() + " tiene " + partidos.getPg() + " partidos");
-                    } else if (informe == 4) {
-                        int goles = repo.totalGoles(repo.listar());
+                    } else if (informeSeleccionado == 4) {
+                        int goles = informe.totalGoles(repo.listar());
                         System.out.println("El torneo tuvo " + goles + " goles");
-                    } else if (informe == 5) {
-                        int promedio = repo.promedio(repo.listar());
+                    } else if (informeSeleccionado == 5) {
+                        int promedio = informe.promedio(repo.listar());
                         System.out.println("El torneo tuvo un promedio de " + promedio + " goles por equipo");
                     }
 
