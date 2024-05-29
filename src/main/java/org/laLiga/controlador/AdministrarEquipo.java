@@ -1,8 +1,6 @@
 package org.laLiga.controlador;
-
 import org.laLiga.Crud;
 import org.laLiga.modelo.Equipo;
-
 import java.util.ArrayList;
 import java.util.List;
 
