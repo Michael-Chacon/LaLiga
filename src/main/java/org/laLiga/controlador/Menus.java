@@ -1,6 +1,7 @@
 package org.laLiga.controlador;
 
 import org.laLiga.modelo.Equipo;
+import org.laLiga.plantel.CuerpoTecnico;
 import org.laLiga.plantel.Jugador;
 
 import java.time.LocalDate;
@@ -25,7 +26,7 @@ public class Menus {
             int id = repo.ultimoid();
             System.out.println("Ingrese el nombre del equipo");
             String nombre = sc.nextLine();
-            sc.nextLine();
+            sc.next();
             repo.crear(new Equipo(id, nombre, 0,0,0,0,0,0,0));
             System.out.println("quieres registrar otro equipo?(y/n)");
             String option = sc.next();
@@ -131,7 +132,41 @@ public class Menus {
     }
 
     public void registrarCuTecnico(Equipo equipo){
+        System.out.println("--------------------------------------------------------");
+        System.out.println("** Registrar jugador en el " + equipo.getNombre() + " **");
+        System.out.println("---------------------------------------------------------\n");
 
+        String[] roles = {"Tecnico", "Asistente tecnico", "Preparador fisico"};
+
+        registrarCuTecnico: while (true){
+            int idCuTecnico = cuerpoTecnico.ultimoId();
+
+            System.out.print("Nombre: ");
+            String nombre = sc.nextLine();
+            sc.nextLine();
+
+            System.out.print("Apellidos: ");
+            String apellido = sc.nextLine();
+            sc.nextLine();
+
+            System.out.print("Edad: ");
+            int edad = sc.nextInt();
+
+            System.out.println("Roles: ");
+            for (int i = 0; i < roles.length; i++){
+                System.out.println(i + ". " + roles[i]);
+            }
+            System.out.print("Selecciona el rol por el número: ");
+            String rol = roles[sc.nextInt()];
+
+            cuerpoTecnico.addObject(new CuerpoTecnico(idCuTecnico, nombre, apellido, rol, edad, equipo.getId()));
+
+            System.out.println("quieres registrar otro equipo?(y/n)");
+            String option = sc.next();
+            if (option.equalsIgnoreCase("n")){
+                break registrarCuTecnico;
+            }
+        }
     }
 
     public void registrarCuMedico(Equipo equipo){
