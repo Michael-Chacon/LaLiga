@@ -1,10 +1,13 @@
-package org.laLiga.team.jugadores;
+package org.laLiga.plantel;
 
 import org.laLiga.abstraccion.Persona;
+import org.laLiga.abstraccion.Plantel;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class Jugador extends Persona {
+public class Jugador extends Plantel<Jugador> {
     int dorsal;
     String posicionJuego;
     String nacionalidad;
@@ -13,11 +16,14 @@ public class Jugador extends Persona {
     int tarjetasRojas;
     int tarjetasAmarillas;
 
+    List<Jugador> arrayJugadores;
+
     public Jugador() {
+        this.arrayJugadores = new ArrayList<>();
     }
 
-    public Jugador(int id, String nombre, String apellido, int edad, int dorsal, String posicionJuego, String nacionalidad, Date fechaIngreso) {
-        super(id, nombre, apellido, edad);
+    public Jugador(int id, String nombre, String apellidos, String rol, int edad, int idEquipo, int dorsal, String posicionJuego, String nacionalidad, Date fechaIngreso) {
+        super(id, nombre, apellidos, rol, edad, idEquipo);
         this.dorsal = dorsal;
         this.posicionJuego = posicionJuego;
         this.nacionalidad = nacionalidad;
@@ -78,5 +84,20 @@ public class Jugador extends Persona {
 
     public void setTarjetasAmarillas(int tarjetasAmarillas) {
         this.tarjetasAmarillas = tarjetasAmarillas;
+    }
+
+    @Override
+    public void addObject(Jugador valor) {
+        this.arrayJugadores.add(valor);
+    }
+
+    @Override
+    public List<Jugador> listar() {
+        return this.arrayJugadores;
+    }
+
+    @Override
+    public <T> T buscarPorId(int id) {
+        return null;
     }
 }

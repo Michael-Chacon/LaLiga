@@ -17,6 +17,7 @@ public class Menus {
             System.out.println("Ingrese el nombre del equipo");
             String nombre = sc.next();
             repo.crear(new Equipo(id, nombre, 0,0,0,0,0,0,0));
+
             System.out.println("quieres registrar otro equipo?(y/n)");
             String option = sc.next();
             if (option.equalsIgnoreCase("n")){

@@ -1,11 +1,13 @@
 package org.laLiga;
 
-import org.laLiga.team.jugadores.Jugador;
+import org.laLiga.plantel.CuerpoMedico;
 
 public class Pruebas {
     public static void main(String[] args) {
-        Jugador ronaldo = new Jugador(1, "Cristiano", "Ronaldo", 40);
-        System.out.println(ronaldo.getNombre() + " " + ronaldo.getApellido());
+        CuerpoMedico cm = new CuerpoMedico();
+
+        cm.setNombre("alexis");
+        System.out.println(cm.getNombre());
 
     }
 }
