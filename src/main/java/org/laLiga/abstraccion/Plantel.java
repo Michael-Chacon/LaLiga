@@ -1,11 +1,9 @@
 package org.laLiga.abstraccion;
 
-import java.util.List;
-
-abstract public class Plantel<T>{
+public class Plantel {
     int id;
     String nombre;
-    String apellidos;
+    String apellido;
     String rol;
     int edad;
     int idEquipo;
@@ -13,15 +11,22 @@ abstract public class Plantel<T>{
     public Plantel() {
     }
 
-    public Plantel(int id, String nombre, String apellidos, String rol, int edad, int idEquipo) {
+    public Plantel(int id, String nombre, String apellido, String rol, int edad, int idEquipo) {
         this.id = id;
         this.nombre = nombre;
-        this.apellidos = apellidos;
+        this.apellido = apellido;
         this.rol = rol;
         this.edad = edad;
         this.idEquipo = idEquipo;
     }
 
+    public Plantel(int id, String nombre, String apellido, int edad, int idEquipo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.idEquipo = idEquipo;
+    }
 
     public int getId() {
         return id;
@@ -39,12 +44,12 @@ abstract public class Plantel<T>{
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getRol() {
@@ -70,8 +75,4 @@ abstract public class Plantel<T>{
     public void setIdEquipo(int idEquipo) {
         this.idEquipo = idEquipo;
     }
-
-    abstract public void addObject(T valor);
-    abstract public List<T> listar();
-    abstract public <T> T buscarPorId(int id);
 }

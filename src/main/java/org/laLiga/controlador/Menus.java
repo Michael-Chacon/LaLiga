@@ -1,13 +1,22 @@
 package org.laLiga.controlador;
 
 import org.laLiga.modelo.Equipo;
+import org.laLiga.plantel.Jugador;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class Menus {
+
     AdministrarEquipo repo = new AdministrarEquipo();
+    JugadorRepositorio jugador = new JugadorRepositorio();
+    CuMedicoRepositorio cuerpoMedico = new CuMedicoRepositorio();
+    CuTecnicoRepositorio cuerpoTecnico = new CuTecnicoRepositorio();
+
     Scanner sc = new Scanner(System.in);
+
     public void registrarEquipo(){
         System.out.println("--------------------------");
         System.out.println("** Registro de equipos **");
@@ -15,15 +24,118 @@ public class Menus {
         registro: while(true){
             int id = repo.ultimoid();
             System.out.println("Ingrese el nombre del equipo");
-            String nombre = sc.next();
+            String nombre = sc.nextLine();
+            sc.nextLine();
             repo.crear(new Equipo(id, nombre, 0,0,0,0,0,0,0));
-
             System.out.println("quieres registrar otro equipo?(y/n)");
             String option = sc.next();
             if (option.equalsIgnoreCase("n")){
                 break registro;
             }
         }
+    }
+
+    public void registrarPlantel(){
+        System.out.println("----------------------------------");
+        System.out.println("** Registrar miembros del plantel **");
+        System.out.println("----------------------------------\n");
+        System.out.println("Seleccione por el id al equipo para registra empleados en él");
+
+        System.out.println("----------------------");
+        System.out.println("| ID \t| NOMBRE");
+        System.out.println("----------------------");
+        List<Equipo> equipos = repo.listar();
+        equipos.forEach(equipo -> {
+            System.out.println("| " + equipo.getId() + " \t| " + equipo.getNombre());
+        });
+
+        System.out.print("Seleccione el id: ");
+        int idEQuipo = sc.nextInt();
+
+        Equipo equipoSeleccionado = repo.buscarPorId(idEQuipo);
+
+        System.out.println("Que rol quiere registrar:\n\t1. Jugador\n\t2. Cuerpo tecnico\n\t3. Cuerpo medico");
+        int rol = sc.nextInt();
+
+        if (rol == 1){
+            registrarJugador(equipoSeleccionado);
+        } else if (rol == 2){
+            registrarCuTecnico(equipoSeleccionado);
+        } else if (rol == 3) {
+            registrarCuMedico(equipoSeleccionado);
+        }
+    }
+
+    public void registrarJugador(Equipo equipo){
+        System.out.println("--------------------------------------------------------");
+        System.out.println("** Registrar jugador en el " + equipo.getNombre() + " **");
+        System.out.println("---------------------------------------------------------\n");
+        String[] posiciones = {
+                "Portero",
+                "Defensa Central",
+                "Lateral Derecho",
+                "Lateral Izquierdo",
+                "Defensa Central (Sweeper)",
+                "Centrocampista Defensivo",
+                "Centrocampista Central",
+                "Centrocampista Ofensivo",
+                "Extremo Derecho",
+                "Extremo Izquierdo",
+                "Delantero Centro",
+                "Segundo Delantero",
+                "Extremo Derecho (Delantero)",
+                "Extremo Izquierdo (Delantero)"
+        };
+
+
+        registrarJugador: while (true){
+            int idJugador = jugador.ultimoId();
+
+            System.out.print("Nombre: ");
+            String nombre = sc.nextLine();
+            sc.nextLine();
+
+            System.out.print("Apellidos: ");
+            String apellido = sc.nextLine();
+            sc.nextLine();
+
+            System.out.print("Edad: ");
+            int edad = sc.nextInt();
+
+            System.out.print("Número del dorsal: ");
+            int dorsal = sc.nextInt();
+
+            System.out.println("Posiciones en el fútbol");
+            System.out.println("----------------------");
+            System.out.println("| ID \t| NOMBRE");
+            System.out.println("----------------------");
+            for (int i = 0; i < posiciones.length; i++){
+                System.out.println("| " + i + " \t| " + posiciones[i]);
+            }
+            System.out.print("Seleccione la posición: ");
+            String posicion = posiciones[sc.nextInt()];
+
+            System.out.println("Nacionalidad: ");
+            String nacionalidad = sc.next();
+
+            LocalDate fechaIngreso = LocalDate.now();
+
+            jugador.addObject(new Jugador(idJugador, nombre, apellido, edad, equipo.getId(), dorsal, posicion, nacionalidad, fechaIngreso));
+
+            System.out.println("quieres registrar otro equipo?(y/n)");
+            String option = sc.next();
+            if (option.equalsIgnoreCase("n")){
+                break registrarJugador;
+            }
+        }
+    }
+
+    public void registrarCuTecnico(Equipo equipo){
+
+    }
+
+    public void registrarCuMedico(Equipo equipo){
+
     }
 
     public void fecha(){
