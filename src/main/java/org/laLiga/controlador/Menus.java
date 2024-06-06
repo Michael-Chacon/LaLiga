@@ -265,7 +265,34 @@ public class Menus {
                 }
             }
 
-            System.out.println("¿Hubo tarjeta para el equipo visitante? (y/n)");
+            System.out.println("¿Hubo tarjeta para algún jugador del "+ equipoLocal.getNombre() +" (y/n)");
+            String opcion = sc.next();
+            if (opcion.equals("y")){
+                System.out.println("Listados de jugadores del " + equipoLocal.getNombre());
+                for (Jugador j: jugador.listar()){
+                    if (j.getIdEquipo() == equipoLocal.getId()){
+                        System.out.println(j.getId() + ". " + j.getNombre().concat(j.getApellido()));
+                    }
+                }
+                tarjetasLocal: while(true){
+                    System.out.println("Seleccione el id del jugador que recibió la tarjeta: ");
+                    int idJugador = sc.nextInt();
+                    Jugador goleador = jugador.buscarPorId(idJugador);
+                    System.out.println("Qué tarjeta recibió el jugador " + goleador.getNombre().concat(goleador.getApellido()) + "\n\t1. Amarilla\n\t2. Roja");
+                    int color = sc.nextInt();
+                    if (color == 1){
+                        goleador.setTarjetasAmarillas(goleador.getTarjetasAmarillas() + 1 );
+                    } else if (color == 2) {
+                        goleador.setTarjetasRojas(goleador.getTarjetasRojas() + 1);
+                    }
+
+                    System.out.println("Vas a registrar más tarjetas?(y/n): ");
+                    String option = sc.next();
+                    if (option.equalsIgnoreCase("n")){
+                        break tarjetasLocal;
+                    }
+                }
+            }
 
 
             System.out.println("Escriba el id del equipo que jugó de Visitante");
@@ -278,6 +305,60 @@ public class Menus {
                 repo.registraCombate(equipoLocal, equipoVisitante, golesLocal, golesVisitante);
             }else{
                 repo.registraCombate(equipoVisitante, equipoLocal, golesVisitante, golesLocal);
+            }
+
+            if (golesVisitante > 0){
+                System.out.println("--------------------------");
+                System.out.println("** Registro de goles **");
+                System.out.println("--------------------------\n");
+                System.out.println("Listados de jugadores del " + equipoVisitante.getNombre());
+                for (Jugador j: jugador.listar()){
+                    if (j.getIdEquipo() == equipoVisitante.getId()){
+                        System.out.println(j.getId() + ". " + j.getNombre().concat(j.getApellido()));
+                    }
+                }
+                registrarGolesV: while (true){
+                    System.out.println("Seleccione el id del jugador que hizo el gol: ");
+                    int idJugador = sc.nextInt();
+                    Jugador goleador = jugador.buscarPorId(idJugador);
+                    System.out.println("Cuantos goles hizo " + goleador.getNombre() + ": ");
+                    int goles = sc.nextInt();
+                    goleador.setGolesAnotados(goleador.getGolesAnotados() + goles);
+                    System.out.println("Alguien más hizo gol?(y/n): ");
+                    String option = sc.next();
+                    if (option.equalsIgnoreCase("n")){
+                        break registrarGolesV;
+                    }
+                }
+            }
+
+            System.out.println("¿Hubo tarjeta para algún jugador del "+ equipoLocal.getNombre() +" (y/n)");
+            String opcionVisitante = sc.next();
+            if (opcionVisitante.equals("y")){
+                System.out.println("Listados de jugadores del " + equipoVisitante.getNombre());
+                for (Jugador j: jugador.listar()){
+                    if (j.getIdEquipo() == equipoVisitante.getId()){
+                        System.out.println(j.getId() + ". " + j.getNombre().concat(j.getApellido()));
+                    }
+                }
+                tarjetasVisitante: while(true){
+                    System.out.println("Seleccione el id del jugador que hizo el gol: ");
+                    int idJugador = sc.nextInt();
+                    Jugador goleador = jugador.buscarPorId(idJugador);
+                    System.out.println("Qué tarjeta recibió el jugador " + goleador.getNombre().concat(goleador.getApellido()) + "\n\t1. Amarilla\n\t2. Roja");
+                    int color = sc.nextInt();
+                    if (color == 1){
+                        goleador.setTarjetasAmarillas(goleador.getTarjetasAmarillas() + 1 );
+                    } else if (color == 2) {
+                        goleador.setTarjetasRojas(goleador.getTarjetasRojas() + 1);
+                    }
+
+                    System.out.println("Vas a registrar más tarjetas?(y/n): ");
+                    String option = sc.next();
+                    if (option.equalsIgnoreCase("n")){
+                        break tarjetasVisitante;
+                    }
+                }
             }
         }
     }
