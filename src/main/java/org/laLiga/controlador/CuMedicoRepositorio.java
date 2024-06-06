@@ -1,7 +1,7 @@
 package org.laLiga.controlador;
 
 import org.laLiga.abstraccion.Repositorio;
-import org.laLiga.plantel.CuerpoMedico;
+import org.laLiga.modelo.CuerpoMedico;
 
 import java.util.ArrayList;
 import java.util.List;

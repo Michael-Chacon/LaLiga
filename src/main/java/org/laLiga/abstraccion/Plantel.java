@@ -75,4 +75,16 @@ public class Plantel {
     public void setIdEquipo(int idEquipo) {
         this.idEquipo = idEquipo;
     }
+
+    @Override
+    public String toString() {
+        return "Plantel{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", rol='" + rol + '\'' +
+                ", edad=" + edad +
+                ", idEquipo=" + idEquipo +
+                '}';
+    }
 }

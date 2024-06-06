@@ -1,4 +1,4 @@
-package org.laLiga.plantel;
+package org.laLiga.modelo;
 import org.laLiga.abstraccion.Plantel;
 
 import java.time.LocalDate;
@@ -78,5 +78,18 @@ public class Jugador extends Plantel {
 
     public void setTarjetasAmarillas(int tarjetasAmarillas) {
         this.tarjetasAmarillas = tarjetasAmarillas;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Jugador{" +
+                "dorsal=" + dorsal +
+                ", posicionJuego='" + posicionJuego + '\'' +
+                ", nacionalidad='" + nacionalidad + '\'' +
+                ", fechaIngreso=" + fechaIngreso +
+                ", golesAnotados=" + golesAnotados +
+                ", tarjetasRojas=" + tarjetasRojas +
+                ", tarjetasAmarillas=" + tarjetasAmarillas +
+                '}';
     }
 }

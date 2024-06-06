@@ -1,7 +1,7 @@
 package org.laLiga.controlador;
 
 import org.laLiga.abstraccion.Repositorio;
-import org.laLiga.plantel.Jugador;
+import org.laLiga.modelo.Jugador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,13 @@ public class JugadorRepositorio extends Repositorio<Jugador> {
 
     @Override
     public Jugador buscarPorId(int id) {
-        return null;
+        Jugador resultado = null;
+        for (Jugador jugador: listaJugadores){
+            if (jugador.getId() == id){
+                resultado = jugador;
+            }
+        }
+        return resultado;
     }
 
     @Override

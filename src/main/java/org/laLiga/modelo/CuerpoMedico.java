@@ -1,4 +1,4 @@
-package org.laLiga.plantel;
+package org.laLiga.modelo;
 
 import org.laLiga.abstraccion.Plantel;
 

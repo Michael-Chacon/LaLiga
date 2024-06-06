@@ -1,7 +1,7 @@
 package org.laLiga.controlador;
 
 import org.laLiga.abstraccion.Repositorio;
-import org.laLiga.plantel.CuerpoTecnico;
+import org.laLiga.modelo.CuerpoTecnico;
 
 import java.util.ArrayList;
 import java.util.List;

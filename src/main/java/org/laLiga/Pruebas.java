@@ -1,6 +1,6 @@
 package org.laLiga;
 
-import org.laLiga.plantel.CuerpoMedico;
+import org.laLiga.modelo.CuerpoMedico;
 
 public class Pruebas {
     public static void main(String[] args) {

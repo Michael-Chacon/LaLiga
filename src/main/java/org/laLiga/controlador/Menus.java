@@ -1,11 +1,11 @@
 package org.laLiga.controlador;
 
+import org.laLiga.modelo.CuerpoMedico;
 import org.laLiga.modelo.Equipo;
-import org.laLiga.plantel.CuerpoTecnico;
-import org.laLiga.plantel.Jugador;
+import org.laLiga.modelo.CuerpoTecnico;
+import org.laLiga.modelo.Jugador;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,8 +25,7 @@ public class Menus {
         registro: while(true){
             int id = repo.ultimoid();
             System.out.println("Ingrese el nombre del equipo");
-            String nombre = sc.nextLine();
-            sc.next();
+            String nombre = sc.next();
             repo.crear(new Equipo(id, nombre, 0,0,0,0,0,0,0));
             System.out.println("quieres registrar otro equipo?(y/n)");
             String option = sc.next();
@@ -123,11 +122,14 @@ public class Menus {
 
             jugador.addObject(new Jugador(idJugador, nombre, apellido, edad, equipo.getId(), dorsal, posicion, nacionalidad, fechaIngreso));
 
-            System.out.println("quieres registrar otro equipo?(y/n)");
+            System.out.println("quieres registrar otro jugador?(y/n)");
             String option = sc.next();
             if (option.equalsIgnoreCase("n")){
                 break registrarJugador;
             }
+        }
+        for (Jugador jugador: jugador.listar()){
+            System.out.println(jugador.toString());
         }
     }
 
@@ -142,12 +144,10 @@ public class Menus {
             int idCuTecnico = cuerpoTecnico.ultimoId();
 
             System.out.print("Nombre: ");
-            String nombre = sc.nextLine();
-            sc.nextLine();
+            String nombre = sc.next();
 
             System.out.print("Apellidos: ");
-            String apellido = sc.nextLine();
-            sc.nextLine();
+            String apellido = sc.next();
 
             System.out.print("Edad: ");
             int edad = sc.nextInt();
@@ -167,6 +167,9 @@ public class Menus {
                 break registrarCuTecnico;
             }
         }
+        for (CuerpoTecnico cu: cuerpoTecnico.listar()){
+            System.out.println(cu.toString());
+        }
     }
 
     public void registrarCuMedico(Equipo equipo){
@@ -180,12 +183,10 @@ public class Menus {
             int idCuMedico = cuerpoMedico.ultimoId();
 
             System.out.print("Nombre: ");
-            String nombre = sc.nextLine();
-            sc.nextLine();
+            String nombre = sc.next();
 
             System.out.print("Apellidos: ");
-            String apellido = sc.nextLine();
-            sc.nextLine();
+            String apellido = sc.next();
 
             System.out.print("Edad: ");
             int edad = sc.nextInt();
@@ -204,6 +205,10 @@ public class Menus {
             if (option.equalsIgnoreCase("n")){
                 break registrarCuMedico;
             }
+        }
+
+        for (CuerpoMedico medico: cuerpoMedico.listar()){
+            System.out.println(medico.toString());
         }
     }
 
@@ -234,6 +239,34 @@ public class Menus {
             Equipo equipoLocal = repo.buscarPorId(local);
             System.out.println("Cuantos goles hizo " + equipoLocal.getNombre()+ ": ");
             int golesLocal = sc.nextInt();
+
+            if (golesLocal > 0){
+                System.out.println("--------------------------");
+                System.out.println("** Registro de goles **");
+                System.out.println("--------------------------\n");
+                System.out.println("Listados de jugadores del " + equipoLocal.getNombre());
+                for (Jugador j: jugador.listar()){
+                    if (j.getIdEquipo() == equipoLocal.getId()){
+                        System.out.println(j.getId() + ". " + j.getNombre().concat(j.getApellido()));
+                    }
+                }
+                registrarGoles: while (true){
+                    System.out.println("Seleccione el id del jugador que hizo el gol: ");
+                    int idJugador = sc.nextInt();
+                    Jugador goleador = jugador.buscarPorId(idJugador);
+                    System.out.println("Cuantos goles hizo " + goleador.getNombre() + ": ");
+                    int goles = sc.nextInt();
+                    goleador.setGolesAnotados(goleador.getGolesAnotados() + goles);
+                    System.out.println("Alguien más hizo gol?(y/n): ");
+                    String option = sc.next();
+                    if (option.equalsIgnoreCase("n")){
+                        break registrarGoles;
+                    }
+                }
+            }
+
+            System.out.println("¿Hubo tarjeta para el equipo visitante? (y/n)");
+
 
             System.out.println("Escriba el id del equipo que jugó de Visitante");
             int visitante = sc.nextInt();
