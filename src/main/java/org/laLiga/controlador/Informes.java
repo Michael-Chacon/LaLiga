@@ -1,6 +1,7 @@
 package org.laLiga.controlador;
 
 import org.laLiga.modelo.Equipo;
+import org.laLiga.modelo.Jugador;
 
 import java.util.List;
 
@@ -48,5 +49,35 @@ public class Informes {
         int totalGoles = this.totalGoles(arrayEquipos);
         float total = totalGoles/totalEquipos;
         return total;
+    }
+
+    public Jugador jugadorMasGoles(List<Jugador> jugadores){
+        Jugador resultado = null;
+        for (Jugador jugador: jugadores){
+            if (resultado == null || jugador.getGolesAnotados() > resultado.getGolesAnotados()){
+                resultado = jugador;
+            }
+        }
+        return resultado;
+    }
+
+    public Jugador masTarjetasRojas(List<Jugador> jugadores){
+        Jugador resultado = null;
+        for (Jugador jugador: jugadores){
+            if (resultado == null || jugador.getTarjetasRojas() > resultado.getTarjetasRojas()){
+                resultado = jugador;
+            }
+        }
+        return resultado;
+    }
+
+    public Jugador masTarjetasAmarillas(List<Jugador> jugadores){
+        Jugador resultado = null;
+        for (Jugador jugador: jugadores){
+            if (resultado == null || jugador.getTarjetasAmarillas() > resultado.getTarjetasAmarillas()){
+                resultado = jugador;
+            }
+        }
+        return resultado;
     }
 }

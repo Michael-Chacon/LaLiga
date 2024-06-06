@@ -376,7 +376,9 @@ public class Menus {
 
             informes: while (true){
                 System.out.println("Seleccione el informe que quiere ver:\n\t1. Equipo más goleador\n\t2. Equipo con más Puntos" +
-                        "\n\t3. Equipo con más partidos ganados\n\t4. Total de goles anotados por todos\n\t5. Promedio de goles anotados");
+                        "\n\t3. Equipo con más partidos ganados\n\t4. Total de goles anotados por todos\n\t5. Promedio de goles anotados" +
+                        "\n\t6. Jugador con más goles\n\t7. Jugador con más tarjetas amarillas\n\t8. Jugador con más tarjetas rojas" +
+                        "\n\t9. Jugadores por equipo\n\t10. Cuerpo técnico por equip");
                 int informeSeleccionado = sc.nextInt();
                 if (informeSeleccionado == 1){
                     Equipo mejor = informe.masGoles(repo.listar());
@@ -393,6 +395,24 @@ public class Menus {
                 } else if (informeSeleccionado == 5) {
                     float promedio = informe.promedio(repo.listar());
                     System.out.println("El torneo tuvo un promedio de " + promedio + " goles por equipo");
+                } else if (informeSeleccionado == 6) {
+                    Jugador jugadorMasGoles = informe.jugadorMasGoles(jugador.listar());
+                    Equipo equipo = repo.buscarPorId(jugadorMasGoles.getIdEquipo());
+                    System.out.println("El jugador " + jugadorMasGoles.getNombre().concat(jugadorMasGoles.getApellido()) + " del " + equipo.getNombre() +
+                            " hizo " + jugadorMasGoles.getGolesAnotados() + " goles.");
+                } else if (informeSeleccionado == 7) {
+                    Jugador jugadorTarjetas = informe.masTarjetasAmarillas(jugador.listar());
+                    Equipo equipo = repo.buscarPorId(jugadorTarjetas.getIdEquipo());
+                    System.out.println("El jugador " + jugadorTarjetas.getNombre().concat(jugadorTarjetas.getApellido()) + " del " + equipo.getNombre() +
+                            " tiene " + jugadorTarjetas.getTarjetasAmarillas() + " tarjetas amarillas.");
+                } else if (informeSeleccionado == 8) {
+                    Jugador jugadorTarjetas = informe.masTarjetasRojas(jugador.listar());
+                    Equipo equipo = repo.buscarPorId(jugadorTarjetas.getIdEquipo());
+                    System.out.println("El jugador " + jugadorTarjetas.getNombre().concat(jugadorTarjetas.getApellido()) + " del " + equipo.getNombre() +
+                            " tiene " + jugadorTarjetas.getTarjetasRojas() + " tarjetas rojas.");
+                }else if(informeSeleccionado == 9){
+                    System.out.println("Listado de equipos:");
+
                 }
 
                 System.out.println("quieres seguir viendo más informes? (y/n)");
