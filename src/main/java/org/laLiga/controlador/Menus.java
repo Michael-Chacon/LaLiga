@@ -133,10 +133,10 @@ public class Menus {
 
     public void registrarCuTecnico(Equipo equipo){
         System.out.println("--------------------------------------------------------");
-        System.out.println("** Registrar jugador en el " + equipo.getNombre() + " **");
+        System.out.println("** Registrar cuerpo técnico en el " + equipo.getNombre() + " **");
         System.out.println("---------------------------------------------------------\n");
 
-        String[] roles = {"Tecnico", "Asistente tecnico", "Preparador fisico"};
+        String[] roles = {"Técnico", "Asistente técnico", "Preparador físico"};
 
         registrarCuTecnico: while (true){
             int idCuTecnico = cuerpoTecnico.ultimoId();
@@ -161,7 +161,7 @@ public class Menus {
 
             cuerpoTecnico.addObject(new CuerpoTecnico(idCuTecnico, nombre, apellido, rol, edad, equipo.getId()));
 
-            System.out.println("quieres registrar otro equipo?(y/n)");
+            System.out.println("quieres registrar otro integrante en el plantel?(y/n)");
             String option = sc.next();
             if (option.equalsIgnoreCase("n")){
                 break registrarCuTecnico;
@@ -170,7 +170,41 @@ public class Menus {
     }
 
     public void registrarCuMedico(Equipo equipo){
+        System.out.println("--------------------------------------------------------");
+        System.out.println("** Registrar cuerpo medico en el " + equipo.getNombre() + " **");
+        System.out.println("---------------------------------------------------------\n");
 
+        String[] roles = {"Médico", "Fisioterapeuta"};
+
+        registrarCuMedico: while (true){
+            int idCuMedico = cuerpoMedico.ultimoId();
+
+            System.out.print("Nombre: ");
+            String nombre = sc.nextLine();
+            sc.nextLine();
+
+            System.out.print("Apellidos: ");
+            String apellido = sc.nextLine();
+            sc.nextLine();
+
+            System.out.print("Edad: ");
+            int edad = sc.nextInt();
+
+            System.out.println("Roles: ");
+            for (int i = 0; i < roles.length; i++){
+                System.out.println(i + ". " + roles[i]);
+            }
+            System.out.print("Selecciona el rol por el número: ");
+            String rol = roles[sc.nextInt()];
+
+            cuerpoTecnico.addObject(new CuerpoTecnico(idCuMedico, nombre, apellido, rol, edad, equipo.getId()));
+
+            System.out.println("quieres registrar otro integrante en el plantel?(y/n)");
+            String option = sc.next();
+            if (option.equalsIgnoreCase("n")){
+                break registrarCuMedico;
+            }
+        }
     }
 
     public void fecha(){
