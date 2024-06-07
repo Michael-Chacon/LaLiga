@@ -14,7 +14,7 @@ public class Main {
             System.out.println("----------");
 
             System.out.println("Options: \n\t1. Registrar equipo\n\t2. Registrar plantel\n\t3. Registrar juego\n\t4. Informes\n\t5. Tabla\n\t0. Salir");
-            control = sc.nextInt();
+            control = Integer.parseInt(sc.nextLine());
 
             if (control == 1){
                 menu.registrarEquipo();
