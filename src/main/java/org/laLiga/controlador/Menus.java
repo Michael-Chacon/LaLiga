@@ -1,5 +1,6 @@
 package org.laLiga.controlador;
 
+import org.laLiga.Validacion.Validacion;
 import org.laLiga.modelo.CuerpoMedico;
 import org.laLiga.modelo.Equipo;
 import org.laLiga.modelo.CuerpoTecnico;
@@ -50,13 +51,10 @@ public class Menus {
         });
         System.out.println("_______________________________");
 
-        System.out.print("Seleccione el id: ");
-        int idEQuipo = Integer.parseInt(sc.nextLine());
-
+        int idEQuipo = Validacion.validarInt("Seleccione el id: ");
         Equipo equipoSeleccionado = repo.buscarPorId(idEQuipo);
 
-        System.out.println("Que rol quiere registrar:\n\t1. Jugador\n\t2. Cuerpo tecnico\n\t3. Cuerpo medico");
-        int rol = Integer.parseInt(sc.nextLine());
+        int rol = Validacion.validarInt("Que rol quiere registrar:\n\t1. Jugador\n\t2. Cuerpo tecnico\n\t3. Cuerpo medico\n");
 
         if (rol == 1){
             registrarJugador(equipoSeleccionado);
@@ -98,22 +96,22 @@ public class Menus {
             System.out.print("Apellidos: ");
             String apellido = sc.nextLine();
 
-            System.out.print("Edad: ");
-            int edad = Integer.parseInt(sc.nextLine());
+            int edad = Validacion.validarInt("Edad: ");
 
-            System.out.print("Número del dorsal: ");
-            int dorsal = Integer.parseInt(sc.nextLine());
+            int dorsal = Validacion.validarInt("Número del dorsal: ");
 
             System.out.println("Posiciones en el fútbol");
-            System.out.println("_________________");
-            System.out.println("| ID \t| NOMBRE");
+            System.out.println("___________________________________________");
+//            System.out.println("| ID \t| NOMBRE");
+            System.out.println(String.format("| %-7s | %-30s |", "ID", "NOMBRE"));
             for (int i = 0; i < posiciones.length; i++){
-                System.out.println("_________________");
-                System.out.println("| " + i + " \t| " + posiciones[i]);
+                System.out.println("___________________________________________");
+//                System.out.println("| " + i + " \t| " + posiciones[i]);
+                System.out.println(String.format("| %-7s | %-30s |", i, posiciones[i]));
             }
-            System.out.println("_________________");
-            System.out.print("Seleccione la posición: ");
-            String posicion = posiciones[Integer.parseInt(sc.nextLine())];
+            System.out.println("___________________________________________");
+            int indice = Validacion.validarInt("Seleccione la posición: ");
+            String posicion = posiciones[indice];
 
             System.out.print("Nacionalidad: ");
             String nacionalidad = sc.nextLine();
@@ -149,15 +147,14 @@ public class Menus {
             System.out.print("Apellidos: ");
             String apellido = sc.nextLine();
 
-            System.out.print("Edad: ");
-            int edad = Integer.parseInt(sc.nextLine());
+            int edad = Validacion.validarInt("Edad: ");
 
             System.out.println("Roles: ");
             for (int i = 0; i < roles.length; i++){
                 System.out.println(i + ". " + roles[i]);
             }
-            System.out.print("Selecciona el rol por el número: ");
-            String rol = roles[Integer.parseInt(sc.nextLine())];
+            int indice = Validacion.validarInt("Selecciona el rol por el número: ");
+            String rol = roles[indice];
 
             cuerpoTecnico.addObject(new CuerpoTecnico(idCuTecnico, nombre, apellido, rol, edad, equipo.getId()));
 
@@ -188,15 +185,14 @@ public class Menus {
             System.out.print("Apellidos: ");
             String apellido = sc.nextLine();
 
-            System.out.print("Edad: ");
-            int edad = Integer.parseInt(sc.nextLine());
+            int edad = Validacion.validarInt("Edad: ");
 
             System.out.println("Roles: ");
             for (int i = 0; i < roles.length; i++){
                 System.out.println(i + ". " + roles[i]);
             }
-            System.out.print("Selecciona el rol por el número: ");
-            String rol = roles[Integer.parseInt(sc.nextLine())];
+            int indice = Validacion.validarInt("Selecciona el rol por el número: ");
+            String rol = roles[indice];
 
             cuerpoTecnico.addObject(new CuerpoTecnico(idCuMedico, nombre, apellido, rol, edad, equipo.getId()));
 
@@ -234,11 +230,11 @@ public class Menus {
             System.out.println("----------------------");
             System.out.println();
 
-            System.out.println("Escriba el id del equipo que jugó de local");
-            int local = Integer.parseInt(sc.nextLine());
+            int local = Validacion.validarInt("Escriba el id del equipo que jugó de local: ");
             Equipo equipoLocal = repo.buscarPorId(local);
-            System.out.println("Cuantos goles hizo " + equipoLocal.getNombre()+ ": ");
-            int golesLocal = Integer.parseInt(sc.nextLine());
+            int golesLocal = Validacion.validarInt("Cuantos goles hizo " + equipoLocal.getNombre()+ ": ");
+//            System.out.println("Cuantos goles hizo " + equipoLocal.getNombre()+ ": ");
+//            int golesLocal = Integer.parseInt(sc.nextLine());
 
             if (golesLocal > 0){
                 System.out.println("--------------------------");
@@ -251,11 +247,10 @@ public class Menus {
                     }
                 }
                 registrarGoles: while (true){
-                    System.out.println("Seleccione el id del jugador que hizo el gol: ");
-                    int idJugador = Integer.parseInt(sc.nextLine());
+                    int idJugador = Validacion.validarInt("Seleccione el id del jugador que hizo el gol: ");
                     Jugador goleador = jugador.buscarPorId(idJugador);
-                    System.out.println("Cuantos goles hizo " + goleador.getNombre() + ": ");
-                    int goles = Integer.parseInt(sc.nextLine());
+                    int goles = Validacion.validarInt("Cuantos goles hizo " + goleador.getNombre() + ": ");
+
                     goleador.setGolesAnotados(goleador.getGolesAnotados() + goles);
                     System.out.print("Alguien más hizo gol? (y/n): ");
                     String option = sc.nextLine();
@@ -275,11 +270,10 @@ public class Menus {
                     }
                 }
                 tarjetasLocal: while(true){
-                    System.out.println("Seleccione el id del jugador que recibió la tarjeta: ");
-                    int idJugador = Integer.parseInt(sc.nextLine());
+                    int idJugador = Validacion.validarInt("Seleccione el id del jugador que recibió la tarjeta: ");
                     Jugador goleador = jugador.buscarPorId(idJugador);
-                    System.out.println("Qué tarjeta recibió el jugador " + goleador.getNombre().concat(goleador.getApellido()) + "\n\t1. Amarilla\n\t2. Roja");
-                    int color = Integer.parseInt(sc.nextLine());
+//                    System.out.println("Qué tarjeta recibió el jugador " + goleador.getNombre().concat(goleador.getApellido()) + "\n\t1. Amarilla\n\t2. Roja");
+                    int color = Validacion.validarInt("Qué tarjeta recibió el jugador " + goleador.getNombre().concat(goleador.getApellido()) + "\n\t1. Amarilla\n\t2. Roja\n");
                     if (color == 1){
                         goleador.setTarjetasAmarillas(goleador.getTarjetasAmarillas() + 1 );
                     } else if (color == 2) {
@@ -294,12 +288,9 @@ public class Menus {
                 }
             }
 
-
-            System.out.println("Escriba el id del equipo que jugó de Visitante");
-            int visitante = Integer.parseInt(sc.nextLine());
+            int visitante = Validacion.validarInt("Escriba el id del equipo que jugó de Visitante");
             Equipo equipoVisitante = repo.buscarPorId(visitante);
-            System.out.println("Cuantos goles hizo " + equipoVisitante.getNombre()+ ": ");
-            int golesVisitante = Integer.parseInt(sc.nextLine());
+            int golesVisitante = Validacion.validarInt("Cuantos goles hizo " + equipoVisitante.getNombre()+ ": ");
 
             if (golesLocal > golesVisitante || golesLocal == golesVisitante) {
                 repo.registraCombate(equipoLocal, equipoVisitante, golesLocal, golesVisitante);
@@ -318,11 +309,9 @@ public class Menus {
                     }
                 }
                 registrarGolesV: while (true){
-                    System.out.println("Seleccione el id del jugador que hizo el gol: ");
-                    int idJugador = Integer.parseInt(sc.nextLine());
+                    int idJugador = Validacion.validarInt("Seleccione el id del jugador que hizo el gol: ");
                     Jugador goleador = jugador.buscarPorId(idJugador);
-                    System.out.println("Cuantos goles hizo " + goleador.getNombre() + ": ");
-                    int goles = Integer.parseInt(sc.nextLine());
+                    int goles = Validacion.validarInt("Cuantos goles hizo " + goleador.getNombre() + ": ");
                     goleador.setGolesAnotados(goleador.getGolesAnotados() + goles);
                     System.out.print("Alguien más hizo gol? (y/n): ");
                     String option = sc.nextLine();
@@ -332,7 +321,7 @@ public class Menus {
                 }
             }
 
-            System.out.print("¿Hubo tarjeta para algún jugador del "+ equipoLocal.getNombre() +" (y/n): ");
+            System.out.print("¿Hubo tarjeta para algún jugador del "+ equipoVisitante.getNombre() +" (y/n): ");
             String opcionVisitante = sc.nextLine();
             if (opcionVisitante.equals("y")){
                 System.out.println("Listados de jugadores del " + equipoVisitante.getNombre());
@@ -342,18 +331,16 @@ public class Menus {
                     }
                 }
                 tarjetasVisitante: while(true){
-                    System.out.print("Seleccione el id del jugador que hizo el gol: ");
-                    int idJugador = Integer.parseInt(sc.nextLine());
+                    int idJugador = Validacion.validarInt("Seleccione el id del jugador que recibió la tarjeta: ");
                     Jugador goleador = jugador.buscarPorId(idJugador);
-                    System.out.println("Qué tarjeta recibió el jugador " + goleador.getNombre().concat(goleador.getApellido()) + "\n\t1. Amarilla\n\t2. Roja");
-                    int color = sc.nextInt();
+                    int color = Validacion.validarInt("Qué tarjeta recibió el jugador " + goleador.getNombre().concat(goleador.getApellido()) + "\n\t1. Amarilla\n\t2. Roja\n");
                     if (color == 1){
                         goleador.setTarjetasAmarillas(goleador.getTarjetasAmarillas() + 1 );
                     } else if (color == 2) {
                         goleador.setTarjetasRojas(goleador.getTarjetasRojas() + 1);
                     }
 
-                    System.out.print("Vas a registrar más tarjetas?(y/n): ");
+                    System.out.print("Vas a registrar más tarjetas? (y/n): ");
                     String option = sc.nextLine();
                     if (option.equalsIgnoreCase("n")){
                         break tarjetasVisitante;
@@ -375,11 +362,14 @@ public class Menus {
             System.out.println("Modulo de informes");
 
             informes: while (true){
-                System.out.println("Seleccione el informe que quiere ver:\n\t1. Equipo más goleador\n\t2. Equipo con más Puntos" +
+//                System.out.println("Seleccione el informe que quiere ver:\n\t1. Equipo más goleador\n\t2. Equipo con más Puntos" +
+//                        "\n\t3. Equipo con más partidos ganados\n\t4. Total de goles anotados por todos\n\t5. Promedio de goles anotados" +
+//                        "\n\t6. Jugador con más goles\n\t7. Jugador con más tarjetas amarillas\n\t8. Jugador con más tarjetas rojas" +
+//                        "\n\t9. Jugadores por equipo\n\t10. Cuerpo técnico por equip");
+                int informeSeleccionado = Validacion.validarInt("Seleccione el informe que quiere ver:\n\t1. Equipo más goleador\n\t2. Equipo con más Puntos" +
                         "\n\t3. Equipo con más partidos ganados\n\t4. Total de goles anotados por todos\n\t5. Promedio de goles anotados" +
                         "\n\t6. Jugador con más goles\n\t7. Jugador con más tarjetas amarillas\n\t8. Jugador con más tarjetas rojas" +
-                        "\n\t9. Jugadores por equipo\n\t10. Cuerpo técnico por equip");
-                int informeSeleccionado = Integer.parseInt(sc.nextLine());
+                        "\n\t9. Jugadores por equipo\n\t10. Cuerpo técnico por equipo\n");
                 if (informeSeleccionado == 1){
                     Equipo mejor = informe.masGoles(repo.listar());
                     System.out.println("El " + mejor.getNombre() + " tiene " + mejor.getGf() + " goles");
@@ -412,34 +402,36 @@ public class Menus {
                             " tiene " + jugadorTarjetas.getTarjetasRojas() + " tarjetas rojas.");
                 }else if(informeSeleccionado == 9){
                     System.out.println("Listado de equipos:");
-                    System.out.println("___________________________________________________________");
-                    System.out.println(String.format("|%4s|%-20s|", "ID", "EQUIPO"));System.out.println();
+                    System.out.println("_________________________________");
+                    System.out.println(String.format("| %4s | %-20s |", "ID", "EQUIPO"));
                     for (Equipo equipo: repo.listar()){
-                        System.out.println("___________________________________________________________");
-                        System.out.println(String.format("|%4s|%-20s|", equipo.getId(), equipo.getNombre()));
-                        System.out.println("___________________________________________________________");
+                        System.out.println("_________________________________");
+                        System.out.println(String.format("| %4s | %-20s |", equipo.getId(), equipo.getNombre()));
                     }
-                    System.out.print("Elige el equipo por el id: ");
-                    int id = Integer.parseInt(sc.nextLine());
+                    System.out.println("_________________________________");
+
+                    int id = Validacion.validarInt("Elige el equipo por el id: ");
                     Equipo equipo = repo.buscarPorId(id);
                     System.out.println("Jugadores del " + equipo.getNombre());
-                    System.out.println("___________________________________________________________");
+                    System.out.println("______________________________________________________________________");
                     System.out.println(String.format("| %-22s | %-7s | %-30s |", "NOMBRE", "DORSAL","POSICIÓN"));
                     for (Jugador j: jugador.listar()){
                         if (j.getIdEquipo() == equipo.getId()){
-                            System.out.println("___________________________________________________________");
-                            System.out.println(String.format("| %-22s | %-7s | %-30s |", j.getApellido(), j.getDorsal(), j.getPosicionJuego()));
+                            System.out.println("______________________________________________________________________");
+                            System.out.println(String.format("| %-22s | %-7s | %-30s |", j.getNombre().concat(" ").concat(j.getApellido()), j.getDorsal(), j.getPosicionJuego()));
                         }
                     }
-                    System.out.println("___________________________________________________________");
+                    System.out.println("______________________________________________________________________");
                 }else if(informeSeleccionado == 10){
                     System.out.println("Listado de equipos:");
-                    System.out.printf(String.format("|%4s|%-20s|", "ID", "EQUIPO"));System.out.println();
+                    System.out.println("_________________________________");
+                    System.out.println(String.format("| %4s | %-20s |", "ID", "EQUIPO"));
                     for (Equipo equipo: repo.listar()){
-                        System.out.printf(String.format("|%4s|%-20s|", equipo.getId(), equipo.getNombre()));
+                        System.out.println("_________________________________");
+                        System.out.println(String.format("| %4s | %-20s |", equipo.getId(), equipo.getNombre()));
                     }
-                    System.out.print("Elige el equipo por el id: ");
-                    int id = Integer.parseInt(sc.nextLine());
+                    System.out.println("_________________________________");
+                    int id = Validacion.validarInt("Elige el equipo por el id: ");
                     Equipo equipo = repo.buscarPorId(id);
                     System.out.println("\nCuerpo técnico del " + equipo.getNombre());
                     System.out.println("_________________________________________________");
