@@ -1,6 +1,7 @@
 package org.laLiga.controlador;
 
 import org.laLiga.Validacion.Validacion;
+import org.laLiga.abstraccion.Repositorio;
 import org.laLiga.modelo.CuerpoMedico;
 import org.laLiga.modelo.Equipo;
 import org.laLiga.modelo.CuerpoTecnico;
@@ -13,9 +14,9 @@ import java.util.Scanner;
 public class Menus {
 
     AdministrarEquipo repo = new AdministrarEquipo();
-    JugadorRepositorio jugador = new JugadorRepositorio();
-    CuMedicoRepositorio cuerpoMedico = new CuMedicoRepositorio();
-    CuTecnicoRepositorio cuerpoTecnico = new CuTecnicoRepositorio();
+    Repositorio<Jugador> jugador = new JugadorRepositorio();
+    Repositorio<CuerpoMedico> cuerpoMedico = new CuMedicoRepositorio();
+    Repositorio<CuerpoTecnico> cuerpoTecnico = new CuTecnicoRepositorio();
 
     Scanner sc = new Scanner(System.in);
 
