@@ -117,7 +117,8 @@ public class Menus {
             System.out.print("Nacionalidad: ");
             String nacionalidad = sc.nextLine();
 
-            LocalDate fechaIngreso = LocalDate.now();
+            System.out.println("Fecha de ingreso, formato dd-mm-yyyy: ");
+            String fechaIngreso = sc.nextLine();
 
             jugador.addObject(new Jugador(idJugador, nombre, apellido, edad, equipo.getId(), dorsal, posicion, nacionalidad, fechaIngreso));
 
@@ -195,7 +196,7 @@ public class Menus {
             int indice = Validacion.validarInt("Selecciona el rol por el número: ");
             String rol = roles[indice];
 
-            cuerpoTecnico.addObject(new CuerpoTecnico(idCuMedico, nombre, apellido, rol, edad, equipo.getId()));
+            cuerpoMedico.addObject(new CuerpoMedico(idCuMedico, nombre, apellido, rol, edad, equipo.getId()));
 
             System.out.print("quieres registrar otro integrante en el plantel? (y/n): ");
             String option = sc.nextLine();
@@ -234,8 +235,6 @@ public class Menus {
             int local = Validacion.validarInt("Escriba el id del equipo que jugó de local: ");
             Equipo equipoLocal = repo.buscarPorId(local);
             int golesLocal = Validacion.validarInt("Cuantos goles hizo " + equipoLocal.getNombre()+ ": ");
-//            System.out.println("Cuantos goles hizo " + equipoLocal.getNombre()+ ": ");
-//            int golesLocal = Integer.parseInt(sc.nextLine());
 
             if (golesLocal > 0){
                 System.out.println("--------------------------");
@@ -273,7 +272,6 @@ public class Menus {
                 tarjetasLocal: while(true){
                     int idJugador = Validacion.validarInt("Seleccione el id del jugador que recibió la tarjeta: ");
                     Jugador goleador = jugador.buscarPorId(idJugador);
-//                    System.out.println("Qué tarjeta recibió el jugador " + goleador.getNombre().concat(goleador.getApellido()) + "\n\t1. Amarilla\n\t2. Roja");
                     int color = Validacion.validarInt("Qué tarjeta recibió el jugador " + goleador.getNombre().concat(goleador.getApellido()) + "\n\t1. Amarilla\n\t2. Roja\n");
                     if (color == 1){
                         goleador.setTarjetasAmarillas(goleador.getTarjetasAmarillas() + 1 );
@@ -363,10 +361,6 @@ public class Menus {
             System.out.println("Modulo de informes");
 
             informes: while (true){
-//                System.out.println("Seleccione el informe que quiere ver:\n\t1. Equipo más goleador\n\t2. Equipo con más Puntos" +
-//                        "\n\t3. Equipo con más partidos ganados\n\t4. Total de goles anotados por todos\n\t5. Promedio de goles anotados" +
-//                        "\n\t6. Jugador con más goles\n\t7. Jugador con más tarjetas amarillas\n\t8. Jugador con más tarjetas rojas" +
-//                        "\n\t9. Jugadores por equipo\n\t10. Cuerpo técnico por equip");
                 int informeSeleccionado = Validacion.validarInt("Seleccione el informe que quiere ver:\n\t1. Equipo más goleador\n\t2. Equipo con más Puntos" +
                         "\n\t3. Equipo con más partidos ganados\n\t4. Total de goles anotados por todos\n\t5. Promedio de goles anotados" +
                         "\n\t6. Jugador con más goles\n\t7. Jugador con más tarjetas amarillas\n\t8. Jugador con más tarjetas rojas" +
