@@ -63,8 +63,14 @@ public class AdministrarEquipo implements Crud {
     }
 
     @Override
-    public void updateTeam() {
-
+    public void updateTeam(Equipo objeto) {
+        for (int i = 0; i < datosEquipo.size(); i++){
+            if (datosEquipo.get(i).getId() == objeto.getId()){
+                datosEquipo.set(i, objeto);
+                setJson();
+                return;
+            }
+        }
     }
 
     public int ultimoid(){
@@ -97,5 +103,8 @@ public class AdministrarEquipo implements Crud {
             perdedor.setGf(perdedor.getGf() + golesPerdedor);
             perdedor.setGc(perdedor.getGc() + golesGanador);
         }
+        this.updateTeam(ganador);
+        this.updateTeam(perdedor);
+
     }
 }

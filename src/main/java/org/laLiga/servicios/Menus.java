@@ -251,6 +251,7 @@ public class Menus {
                     int goles = Validacion.validarInt("Cuantos goles hizo " + goleador.getNombre() + ": ");
 
                     goleador.setGolesAnotados(goleador.getGolesAnotados() + goles);
+                    jugador.actualizarObjeto(goleador);
                     System.out.print("Alguien más hizo gol? (y/n): ");
                     String option = sc.nextLine();
                     if (option.equalsIgnoreCase("n")){
@@ -274,8 +275,10 @@ public class Menus {
                     int color = Validacion.validarInt("Qué tarjeta recibió el jugador " + goleador.getNombre().concat(goleador.getApellido()) + "\n\t1. Amarilla\n\t2. Roja\n");
                     if (color == 1){
                         goleador.setTarjetasAmarillas(goleador.getTarjetasAmarillas() + 1 );
+                        jugador.actualizarObjeto(goleador);
                     } else if (color == 2) {
                         goleador.setTarjetasRojas(goleador.getTarjetasRojas() + 1);
+                        jugador.actualizarObjeto(goleador);
                     }
 
                     System.out.print("Vas a registrar más tarjetas? (y/n): ");
@@ -311,6 +314,7 @@ public class Menus {
                     Jugador goleador = jugador.buscarPorId(idJugador);
                     int goles = Validacion.validarInt("Cuantos goles hizo " + goleador.getNombre() + ": ");
                     goleador.setGolesAnotados(goleador.getGolesAnotados() + goles);
+                    jugador.actualizarObjeto(goleador);
                     System.out.print("Alguien más hizo gol? (y/n): ");
                     String option = sc.nextLine();
                     if (option.equalsIgnoreCase("n")){
@@ -334,8 +338,10 @@ public class Menus {
                     int color = Validacion.validarInt("Qué tarjeta recibió el jugador " + goleador.getNombre().concat(goleador.getApellido()) + "\n\t1. Amarilla\n\t2. Roja\n");
                     if (color == 1){
                         goleador.setTarjetasAmarillas(goleador.getTarjetasAmarillas() + 1 );
+                        jugador.actualizarObjeto(goleador);
                     } else if (color == 2) {
                         goleador.setTarjetasRojas(goleador.getTarjetasRojas() + 1);
+                        jugador.actualizarObjeto(goleador);
                     }
 
                     System.out.print("Vas a registrar más tarjetas? (y/n): ");
@@ -461,13 +467,41 @@ public class Menus {
         }else {
             System.out.println("Listado de equipos");
             List<Equipo> equipos = repo.listar();
-            System.out.println("--------------------------------------------------------------------------------");
-            System.out.println("| ID \t| PJ \t| PG \t| PP \t| PE \t| GF \t| GC \t| TP \t|  NOMBRE \t\t|");
-            System.out.println("--------------------------------------------------------------------------------");
-            equipos.forEach(equipo -> {
-                System.out.println("| " +equipo.getId() +" \t| "+  equipo.getPj() +" \t| "+ equipo.getPg() +" \t| "+ equipo.getPp() +" \t| "+ equipo.getPe() +" \t| "+ equipo.getGf() +" \t| "+ equipo.getGc() +" \t| "+ equipo.getTp() +" \t| "+equipo.getNombre());
-            });
-            System.out.println("--------------------------------------------------------------------------------");
+
+
+
+//            System.out.println("--------------------------------------------------------------------------------");
+//            System.out.println("| ID \t| PJ \t| PG \t| PP \t| PE \t| GF \t| GC \t| TP \t|  NOMBRE \t\t|");
+//            System.out.println("--------------------------------------------------------------------------------");
+//            ordenar(equipos).forEach(equipo -> {
+//                System.out.println("| " +equipo.getId() +" \t| "+  equipo.getPj() +" \t| "+ equipo.getPg() +" \t| "+ equipo.getPp() +" \t| "+ equipo.getPe() +" \t| "+ equipo.getGf() +" \t| "+ equipo.getGc() +" \t| "+ equipo.getTp() +" \t| "+equipo.getNombre());
+//            });
+//            System.out.println("--------------------------------------------------------------------------------");
+            tablaPosiciones(equipos);
         }
+    }
+
+    public void tablaPosiciones(List<Equipo> equipos){
+        int longitud = equipos.size();
+        for (int i = 0; i < longitud; i++){
+            for (int j = 0; j < longitud - i - 1; j++){
+                if (equipos.get(j).getTp() < equipos.get(j + 1 ).getTp()){
+                    Equipo temporal = equipos.get(j);
+                    equipos.set(j, equipos.get(j + 1));
+                    equipos.set(j + 1, temporal);
+                }
+            }
+        }
+
+//        equipos.sort((tp1, tp2) -> Integer.compare(tp2.getTp(), tp1.getTp()));
+
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("| ID \t| PJ \t| PG \t| PP \t| PE \t| GF \t| GC \t| TP \t|  NOMBRE \t\t|");
+        System.out.println("--------------------------------------------------------------------------------");
+        equipos.forEach(equipo -> {
+            System.out.println("| " +equipo.getId() +" \t| "+  equipo.getPj() +" \t| "+ equipo.getPg() +" \t| "+ equipo.getPp() +" \t| "+ equipo.getPe() +" \t| "+ equipo.getGf() +" \t| "+ equipo.getGc() +" \t| "+ equipo.getTp() +" \t| "+equipo.getNombre());
+        });
+        System.out.println("--------------------------------------------------------------------------------");
+
     }
 }

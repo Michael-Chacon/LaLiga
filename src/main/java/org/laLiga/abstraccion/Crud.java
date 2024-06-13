@@ -10,6 +10,6 @@ public interface Crud {
     Equipo buscarPorId(Integer id);
     List<Equipo> getJson();
     void setJson();
-    void updateTeam();
+    void updateTeam(Equipo objeto);
 
 }
