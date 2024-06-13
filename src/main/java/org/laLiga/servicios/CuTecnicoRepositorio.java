@@ -1,4 +1,4 @@
-package org.laLiga.controlador;
+package org.laLiga.servicios;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -6,45 +6,46 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import org.laLiga.abstraccion.Repositorio;
-import org.laLiga.modelo.CuerpoMedico;
+import org.laLiga.modelo.CuerpoTecnico;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class CuMedicoRepositorio extends Repositorio<CuerpoMedico> {
-    private static final String FILE_PATH = "cuerpoMedico.json";
-    private List<CuerpoMedico> listaCuerpoMedico;
+public class CuTecnicoRepositorio extends Repositorio<CuerpoTecnico> {
+    private static final String FILE_PATH = "cuerpoTecnico.json";
     private Gson gson;
+    List<CuerpoTecnico> listaCuerpoTecnico;
 
-    public CuMedicoRepositorio() {
+    public CuTecnicoRepositorio() {
         this.gson = new GsonBuilder().setPrettyPrinting().create();
-        listaCuerpoMedico = getJson();
+        listaCuerpoTecnico = getJson();
     }
 
     @Override
-    public void addObject(CuerpoMedico valor) {
-        this.listaCuerpoMedico.add(valor);
+    public void addObject(CuerpoTecnico valor) {
+        this.listaCuerpoTecnico.add(valor);
         setJson();
     }
 
     @Override
-    public List<CuerpoMedico> listar() {
-        return new ArrayList<>(listaCuerpoMedico);
+    public List<CuerpoTecnico> listar() {
+        return new ArrayList<>(listaCuerpoTecnico);
     }
 
     @Override
-    public CuerpoMedico buscarPorId(int id) {
+    public CuerpoTecnico buscarPorId(int id) {
         return null;
     }
 
     @Override
     public int ultimoId() {
-        return this.listaCuerpoMedico.size() + 1;
+        return this.listaCuerpoTecnico.size() + 1;
     }
 
     @Override
-    public List<CuerpoMedico> getJson() {
+    public List<CuerpoTecnico> getJson() {
         try(Reader reader = new FileReader(FILE_PATH)){
-            Type listType = new TypeToken<ArrayList<CuerpoMedico>>() {}.getType();
+            Type listType = new TypeToken<ArrayList<CuerpoTecnico>>() {}.getType();
             return gson.fromJson(reader, listType);
         } catch (FileNotFoundException e) {
             return new ArrayList<>(); // Si el archivo no existe retorna una al vacio
@@ -57,17 +58,17 @@ public class CuMedicoRepositorio extends Repositorio<CuerpoMedico> {
     @Override
     public void setJson() {
         try(Writer write = new FileWriter(FILE_PATH)){
-            gson.toJson(listaCuerpoMedico, write);
+            gson.toJson(listaCuerpoTecnico, write);
         }catch (IOException e){
             e.printStackTrace();
         }
     }
 
     @Override
-    public void actualizarObjeto(CuerpoMedico objeto) {
-        for (int i = 0; i < listaCuerpoMedico.size(); i++){
-            if (listaCuerpoMedico.get(i).getId() == objeto.getId()){
-                listaCuerpoMedico.set(i, objeto);
+    public void actualizarObjeto(CuerpoTecnico objeto) {
+        for (int i = 0; i < listaCuerpoTecnico.size(); i++){
+            if (listaCuerpoTecnico.get(i).getId() == objeto.getId()){
+                listaCuerpoTecnico.set(i, objeto);
                 setJson();
                 return;
             }

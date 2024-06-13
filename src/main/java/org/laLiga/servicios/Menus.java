@@ -1,4 +1,4 @@
-package org.laLiga.controlador;
+package org.laLiga.servicios;
 
 import org.laLiga.Validacion.Validacion;
 import org.laLiga.abstraccion.Repositorio;
@@ -7,7 +7,6 @@ import org.laLiga.modelo.Equipo;
 import org.laLiga.modelo.CuerpoTecnico;
 import org.laLiga.modelo.Jugador;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package org.laLiga.controlador;
+package org.laLiga.servicios;
 
 import org.laLiga.modelo.Equipo;
 import org.laLiga.modelo.Jugador;

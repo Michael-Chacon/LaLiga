@@ -1,6 +1,6 @@
 package org.laLiga;
 import org.laLiga.Validacion.Validacion;
-import org.laLiga.controlador.Menus;
+import org.laLiga.servicios.Menus;
 import java.util.Scanner;
 
 public class Main {

@@ -1,4 +1,4 @@
-package org.laLiga.controlador;
+package org.laLiga.servicios;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
