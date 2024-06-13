@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdministrarEquipo implements Crud {
-    public static final String FILE_PATH = "equipos.json";
+    public static final String FILE_PATH = "db/equipos.json";
+//    public static final String FILE_PATH = "src/main/java/org/laLiga/equipos.json";
     public Gson gson;
     public List<Equipo> datosEquipo;
 

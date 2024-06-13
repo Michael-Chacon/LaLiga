@@ -12,10 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CuTecnicoRepositorio extends Repositorio<CuerpoTecnico> {
-    private static final String FILE_PATH = "cuerpoTecnico.json";
+    private static final String FILE_PATH = "db/cuerpoTecnico.json";
     private Gson gson;
     List<CuerpoTecnico> listaCuerpoTecnico;
-
     public CuTecnicoRepositorio() {
         this.gson = new GsonBuilder().setPrettyPrinting().create();
         listaCuerpoTecnico = getJson();

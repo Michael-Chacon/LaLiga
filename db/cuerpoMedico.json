@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "nombre": "Duvan",
+    "apellido": "Arenas",
+    "rol": "Médico",
+    "edad": 23,
+    "idEquipo": 1
+  },
+  {
+    "id": 2,
+    "nombre": "Maritza",
+    "apellido": "Estaban",
+    "rol": "Médico",
+    "edad": 19,
+    "idEquipo": 4
+  }
+]

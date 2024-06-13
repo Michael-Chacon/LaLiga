@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CuMedicoRepositorio extends Repositorio<CuerpoMedico> {
-    private static final String FILE_PATH = "cuerpoMedico.json";
+    private static final String FILE_PATH = "db/cuerpoMedico.json";
     private List<CuerpoMedico> listaCuerpoMedico;
     private Gson gson;
 

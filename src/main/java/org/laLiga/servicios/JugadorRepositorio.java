@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JugadorRepositorio extends Repositorio<Jugador> {
-    private static final String FILE_PATH = "personas.json";
+    private static final String FILE_PATH = "db/personas.json";
     private Gson gson;
     List<Jugador> listaJugadores;
 
