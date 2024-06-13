@@ -1,4 +1,4 @@
-package org.laLiga;
+package org.laLiga.abstraccion;
 
 import org.laLiga.modelo.Equipo;
 
@@ -8,5 +8,8 @@ public interface Crud {
     List<Equipo> listar();
     void crear(Equipo equipo);
     Equipo buscarPorId(Integer id);
+    List<Equipo> getJson();
+    void setJson();
+    void updateTeam(Equipo objeto);
 
 }

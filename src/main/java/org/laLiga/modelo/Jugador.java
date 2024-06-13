@@ -8,7 +8,7 @@ public class Jugador extends Plantel {
     int dorsal;
     String posicionJuego;
     String nacionalidad;
-    LocalDate fechaIngreso;
+    String fechaIngreso;
     int golesAnotados;
     int tarjetasRojas;
     int tarjetasAmarillas;
@@ -16,7 +16,7 @@ public class Jugador extends Plantel {
     public Jugador() {
     }
 
-    public Jugador(int id, String nombre, String apellido, int edad, int idEquipo, int dorsal, String posicionJuego, String nacionalidad, LocalDate fechaIngreso) {
+    public Jugador(int id, String nombre, String apellido, int edad, int idEquipo, int dorsal, String posicionJuego, String nacionalidad, String fechaIngreso) {
         super(id, nombre, apellido, edad, idEquipo);
         this.dorsal = dorsal;
         this.posicionJuego = posicionJuego;
@@ -48,11 +48,11 @@ public class Jugador extends Plantel {
         this.nacionalidad = nacionalidad;
     }
 
-    public LocalDate getFechaIngreso() {
+    public String getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(LocalDate fechaIngreso) {
+    public void setFechaIngreso(String fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 

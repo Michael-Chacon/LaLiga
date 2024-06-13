@@ -7,4 +7,7 @@ abstract  public class Repositorio<T> {
     abstract public List<T> listar();
     abstract public  T buscarPorId(int id);
     abstract public int ultimoId();
+    abstract public List<T> getJson();
+    abstract public void setJson();
+    abstract public void actualizarObjeto(T objeto);
 }

@@ -1,0 +1,58 @@
+[
+  {
+    "dorsal": 7,
+    "posicionJuego": "Delantero Centro",
+    "nacionalidad": "Portugues",
+    "fechaIngreso": "01-01-2024",
+    "golesAnotados": 4,
+    "tarjetasRojas": 0,
+    "tarjetasAmarillas": 0,
+    "id": 1,
+    "nombre": "Cristiano",
+    "apellido": "Ronaldo",
+    "edad": 40,
+    "idEquipo": 1
+  },
+  {
+    "dorsal": 11,
+    "posicionJuego": "Extremo Izquierdo (Delantero)",
+    "nacionalidad": "Ecuador",
+    "fechaIngreso": "04-02-2023",
+    "golesAnotados": 0,
+    "tarjetasRojas": 0,
+    "tarjetasAmarillas": 0,
+    "id": 2,
+    "nombre": "Carlos",
+    "apellido": "Franco",
+    "edad": 28,
+    "idEquipo": 2
+  },
+  {
+    "dorsal": 10,
+    "posicionJuego": "Extremo Izquierdo (Delantero)",
+    "nacionalidad": "Español",
+    "fechaIngreso": "01-02-2020",
+    "golesAnotados": 0,
+    "tarjetasRojas": 0,
+    "tarjetasAmarillas": 1,
+    "id": 3,
+    "nombre": "Yamin",
+    "apellido": "Lamal",
+    "edad": 19,
+    "idEquipo": 3
+  },
+  {
+    "dorsal": 8,
+    "posicionJuego": "Centrocampista Ofensivo",
+    "nacionalidad": "Español",
+    "fechaIngreso": "10-10-2000",
+    "golesAnotados": 2,
+    "tarjetasRojas": 0,
+    "tarjetasAmarillas": 0,
+    "id": 4,
+    "nombre": "Iñigo",
+    "apellido": "Broncano",
+    "edad": 38,
+    "idEquipo": 4
+  }
+]

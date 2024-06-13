@@ -1,14 +1,22 @@
-package org.laLiga.controlador;
-import org.laLiga.Crud;
+package org.laLiga.servicios;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.io.*;
+import java.lang.reflect.Type;
+import org.laLiga.abstraccion.Crud;
 import org.laLiga.modelo.Equipo;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdministrarEquipo implements Crud {
+    public static final String FILE_PATH = "equipos.json";
+    public Gson gson;
     public List<Equipo> datosEquipo;
 
     public AdministrarEquipo(){
-        this.datosEquipo = new ArrayList<>();
+        this.gson = new GsonBuilder().setPrettyPrinting().create();
+        this.datosEquipo = getJson();
     }
 
     @Override
@@ -19,6 +27,7 @@ public class AdministrarEquipo implements Crud {
     @Override
     public void crear(Equipo equipo) {
         this.datosEquipo.add(equipo);
+        setJson();
     }
 
     @Override
@@ -30,6 +39,38 @@ public class AdministrarEquipo implements Crud {
             }
         }
         return resultado;
+    }
+
+    @Override
+    public List<Equipo> getJson() {
+        try(Reader reader = new FileReader(FILE_PATH)) {
+            Type listType = new TypeToken<ArrayList<Equipo>>() {}.getType();
+            return gson.fromJson(reader, listType);
+        } catch (FileNotFoundException e) {
+            return new ArrayList<>();
+        } catch (IOException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public void setJson() {
+        try(Writer writer = new FileWriter(FILE_PATH)) {
+            gson.toJson(datosEquipo, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateTeam(Equipo objeto) {
+        for (int i = 0; i < datosEquipo.size(); i++){
+            if (datosEquipo.get(i).getId() == objeto.getId()){
+                datosEquipo.set(i, objeto);
+                setJson();
+                return;
+            }
+        }
     }
 
     public int ultimoid(){
@@ -62,5 +103,8 @@ public class AdministrarEquipo implements Crud {
             perdedor.setGf(perdedor.getGf() + golesPerdedor);
             perdedor.setGc(perdedor.getGc() + golesGanador);
         }
+        this.updateTeam(ganador);
+        this.updateTeam(perdedor);
+
     }
 }
