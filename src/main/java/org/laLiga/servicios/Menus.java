@@ -388,17 +388,17 @@ public class Menus {
                 } else if (informeSeleccionado == 6) {
                     Jugador jugadorMasGoles = informe.jugadorMasGoles(jugador.listar());
                     Equipo equipo = repo.buscarPorId(jugadorMasGoles.getIdEquipo());
-                    System.out.println("El jugador " + jugadorMasGoles.getNombre().concat(jugadorMasGoles.getApellido()) + " del " + equipo.getNombre() +
+                    System.out.println("El jugador " + jugadorMasGoles.getNombre().concat(" ").concat(jugadorMasGoles.getApellido()) + " del " + equipo.getNombre() +
                             " hizo " + jugadorMasGoles.getGolesAnotados() + " goles.");
                 } else if (informeSeleccionado == 7) {
                     Jugador jugadorTarjetas = informe.masTarjetasAmarillas(jugador.listar());
                     Equipo equipo = repo.buscarPorId(jugadorTarjetas.getIdEquipo());
-                    System.out.println("El jugador " + jugadorTarjetas.getNombre().concat(jugadorTarjetas.getApellido()) + " del " + equipo.getNombre() +
+                    System.out.println("El jugador " + jugadorTarjetas.getNombre().concat(" ").concat(jugadorTarjetas.getApellido()) + " del " + equipo.getNombre() +
                             " tiene " + jugadorTarjetas.getTarjetasAmarillas() + " tarjetas amarillas.");
                 } else if (informeSeleccionado == 8) {
                     Jugador jugadorTarjetas = informe.masTarjetasRojas(jugador.listar());
                     Equipo equipo = repo.buscarPorId(jugadorTarjetas.getIdEquipo());
-                    System.out.println("El jugador " + jugadorTarjetas.getNombre().concat(jugadorTarjetas.getApellido()) + " del " + equipo.getNombre() +
+                    System.out.println("El jugador " + jugadorTarjetas.getNombre().concat(" ").concat(jugadorTarjetas.getApellido()) + " del " + equipo.getNombre() +
                             " tiene " + jugadorTarjetas.getTarjetasRojas() + " tarjetas rojas.");
                 }else if(informeSeleccionado == 9){
                     System.out.println("Listado de equipos:");
@@ -439,7 +439,7 @@ public class Menus {
                     for (CuerpoTecnico cu: cuerpoTecnico.listar()){
                         if (cu.getIdEquipo() == equipo.getId()){
                             System.out.println("_________________________________________________");
-                            System.out.printf(String.format("| %-20s | %-22s |\n", cu.getNombre().concat(cu.getApellido()), cu.getRol()));
+                            System.out.printf(String.format("| %-20s | %-22s |\n", cu.getNombre().concat(" ").concat(cu.getApellido()), cu.getRol()));
                         }
                     }
                     System.out.println("_________________________________________________");
@@ -468,15 +468,6 @@ public class Menus {
             System.out.println("Listado de equipos");
             List<Equipo> equipos = repo.listar();
 
-
-
-//            System.out.println("--------------------------------------------------------------------------------");
-//            System.out.println("| ID \t| PJ \t| PG \t| PP \t| PE \t| GF \t| GC \t| TP \t|  NOMBRE \t\t|");
-//            System.out.println("--------------------------------------------------------------------------------");
-//            ordenar(equipos).forEach(equipo -> {
-//                System.out.println("| " +equipo.getId() +" \t| "+  equipo.getPj() +" \t| "+ equipo.getPg() +" \t| "+ equipo.getPp() +" \t| "+ equipo.getPe() +" \t| "+ equipo.getGf() +" \t| "+ equipo.getGc() +" \t| "+ equipo.getTp() +" \t| "+equipo.getNombre());
-//            });
-//            System.out.println("--------------------------------------------------------------------------------");
             tablaPosiciones(equipos);
         }
     }
