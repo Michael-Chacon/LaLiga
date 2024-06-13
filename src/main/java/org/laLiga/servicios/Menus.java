@@ -240,23 +240,32 @@ public class Menus {
                 System.out.println("** Registro de goles **");
                 System.out.println("--------------------------\n");
                 System.out.println("Listados de jugadores del " + equipoLocal.getNombre());
+
                 for (Jugador j: jugador.listar()){
                     if (j.getIdEquipo() == equipoLocal.getId()){
                         System.out.println(j.getId() + ". " + j.getNombre().concat(j.getApellido()));
                     }
                 }
+                int totalGoles = golesLocal;
                 registrarGoles: while (true){
                     int idJugador = Validacion.validarInt("Seleccione el id del jugador que hizo el gol: ");
                     Jugador goleador = jugador.buscarPorId(idJugador);
                     int goles = Validacion.validarInt("Cuantos goles hizo " + goleador.getNombre() + ": ");
 
+                    if (goles > totalGoles){
+                        System.out.println("Mal, La cantidad de goles que hizo un jugador no puede ser superior a los goles anotados en el partido");
+                        continue registrarGoles;
+                    } else if (goles <= totalGoles) {
+                        totalGoles = totalGoles - goles;
+                    }
+
+
                     goleador.setGolesAnotados(goleador.getGolesAnotados() + goles);
                     jugador.actualizarObjeto(goleador);
-                    System.out.print("Alguien más hizo gol? (y/n): ");
-                    String option = sc.nextLine();
-                    if (option.equalsIgnoreCase("n")){
+                    if (totalGoles == 0){
                         break registrarGoles;
                     }
+                    System.out.println("Quedan " + totalGoles + " goles");
                 }
             }
 
@@ -309,17 +318,27 @@ public class Menus {
                         System.out.println(j.getId() + ". " + j.getNombre().concat(j.getApellido()));
                     }
                 }
+
+                int totalGolesv = golesVisitante;
                 registrarGolesV: while (true){
                     int idJugador = Validacion.validarInt("Seleccione el id del jugador que hizo el gol: ");
                     Jugador goleador = jugador.buscarPorId(idJugador);
                     int goles = Validacion.validarInt("Cuantos goles hizo " + goleador.getNombre() + ": ");
+
+                    if (goles > totalGolesv){
+                        System.out.println("Mal, La cantidad de goles que hizo un jugador no puede ser superior a los goles anotados en el partido");
+                        continue registrarGolesV;
+                    } else if (goles <= totalGolesv) {
+                        totalGolesv = totalGolesv - goles;
+                    }
+
                     goleador.setGolesAnotados(goleador.getGolesAnotados() + goles);
                     jugador.actualizarObjeto(goleador);
-                    System.out.print("Alguien más hizo gol? (y/n): ");
-                    String option = sc.nextLine();
-                    if (option.equalsIgnoreCase("n")){
+                    if (totalGolesv == 0){
                         break registrarGolesV;
                     }
+                    System.out.println("Quedan " + totalGolesv + " goles");
+
                 }
             }
 
