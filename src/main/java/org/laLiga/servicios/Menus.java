@@ -225,6 +225,7 @@ public class Menus {
             System.out.println("| ID \t| NOMBRE");
             System.out.println("----------------------");
             List<Equipo> equipos = repo.listar();
+            equipos.sort((tp1, tp2) -> Integer.compare(tp1.getId(), tp2.getId()));
             equipos.forEach(equipo -> {
                 System.out.println("| " + equipo.getId() + " \t| " + equipo.getNombre());
             });
@@ -389,80 +390,27 @@ public class Menus {
                         "\n\t3. Equipo con más partidos ganados\n\t4. Total de goles anotados por todos\n\t5. Promedio de goles anotados" +
                         "\n\t6. Jugador con más goles\n\t7. Jugador con más tarjetas amarillas\n\t8. Jugador con más tarjetas rojas" +
                         "\n\t9. Jugadores por equipo\n\t10. Cuerpo técnico por equipo\n");
+
                 if (informeSeleccionado == 1){
-                    Equipo mejor = informe.masGoles(repo.listar());
-                    System.out.println("El " + mejor.getNombre() + " tiene " + mejor.getGf() + " goles");
+                    informe.masGoles(repo.listar());
                 } else if (informeSeleccionado == 2) {
-                    Equipo puntos = informe.masPuntos(repo.listar());
-                    System.out.println("El " + puntos.getNombre() + " tiene " + puntos.getTp() + " puntos");
+                    informe.masPuntos(repo.listar());
                 } else if (informeSeleccionado == 3) {
-                    Equipo partidos = informe.masPartidosGanados(repo.listar());
-                    System.out.println("El " + partidos.getNombre() + " tiene " + partidos.getPg() + " partidos");
+                    informe.masPartidosGanados(repo.listar());
                 } else if (informeSeleccionado == 4) {
-                    int goles = informe.totalGoles(repo.listar());
-                    System.out.println("El torneo tuvo " + goles + " goles");
+                    informe.totalGoles(repo.listar());
                 } else if (informeSeleccionado == 5) {
-                    float promedio = informe.promedio(repo.listar());
-                    System.out.println("El torneo tuvo un promedio de " + promedio + " goles por equipo");
+                    informe.promedio(repo.listar());
                 } else if (informeSeleccionado == 6) {
-                    Jugador jugadorMasGoles = informe.jugadorMasGoles(jugador.listar());
-                    Equipo equipo = repo.buscarPorId(jugadorMasGoles.getIdEquipo());
-                    System.out.println("El jugador " + jugadorMasGoles.getNombre().concat(" ").concat(jugadorMasGoles.getApellido()) + " del " + equipo.getNombre() +
-                            " hizo " + jugadorMasGoles.getGolesAnotados() + " goles.");
+                    informe.jugadorMasGoles(jugador.listar(), repo);
                 } else if (informeSeleccionado == 7) {
-                    Jugador jugadorTarjetas = informe.masTarjetasAmarillas(jugador.listar());
-                    Equipo equipo = repo.buscarPorId(jugadorTarjetas.getIdEquipo());
-                    System.out.println("El jugador " + jugadorTarjetas.getNombre().concat(" ").concat(jugadorTarjetas.getApellido()) + " del " + equipo.getNombre() +
-                            " tiene " + jugadorTarjetas.getTarjetasAmarillas() + " tarjetas amarillas.");
+                    informe.masTarjetasAmarillas(jugador.listar(), repo);
                 } else if (informeSeleccionado == 8) {
-                    Jugador jugadorTarjetas = informe.masTarjetasRojas(jugador.listar());
-                    Equipo equipo = repo.buscarPorId(jugadorTarjetas.getIdEquipo());
-                    System.out.println("El jugador " + jugadorTarjetas.getNombre().concat(" ").concat(jugadorTarjetas.getApellido()) + " del " + equipo.getNombre() +
-                            " tiene " + jugadorTarjetas.getTarjetasRojas() + " tarjetas rojas.");
+                    informe.masTarjetasRojas(jugador.listar(), repo);
                 }else if(informeSeleccionado == 9){
-                    System.out.println("Listado de equipos:");
-                    System.out.println("_________________________________");
-                    System.out.println(String.format("| %4s | %-20s |", "ID", "EQUIPO"));
-                    for (Equipo equipo: repo.listar()){
-                        System.out.println("_________________________________");
-                        System.out.println(String.format("| %4s | %-20s |", equipo.getId(), equipo.getNombre()));
-                    }
-                    System.out.println("_________________________________");
-
-                    int id = Validacion.validarInt("Elige el equipo por el id: ");
-                    Equipo equipo = repo.buscarPorId(id);
-                    System.out.println("Jugadores del " + equipo.getNombre());
-                    System.out.println("______________________________________________________________________");
-                    System.out.println(String.format("| %-22s | %-7s | %-30s |", "NOMBRE", "DORSAL","POSICIÓN"));
-                    for (Jugador j: jugador.listar()){
-                        if (j.getIdEquipo() == equipo.getId()){
-                            System.out.println("______________________________________________________________________");
-                            System.out.println(String.format("| %-22s | %-7s | %-30s |", j.getNombre().concat(" ").concat(j.getApellido()), j.getDorsal(), j.getPosicionJuego()));
-                        }
-                    }
-                    System.out.println("______________________________________________________________________");
+                    informe.plantillaJugadores(repo, jugador);
                 }else if(informeSeleccionado == 10){
-                    System.out.println("Listado de equipos:");
-                    System.out.println("_________________________________");
-                    System.out.println(String.format("| %4s | %-20s |", "ID", "EQUIPO"));
-                    for (Equipo equipo: repo.listar()){
-                        System.out.println("_________________________________");
-                        System.out.println(String.format("| %4s | %-20s |", equipo.getId(), equipo.getNombre()));
-                    }
-                    System.out.println("_________________________________");
-                    int id = Validacion.validarInt("Elige el equipo por el id: ");
-                    Equipo equipo = repo.buscarPorId(id);
-                    System.out.println("\nCuerpo técnico del " + equipo.getNombre());
-                    System.out.println("_________________________________________________");
-                    System.out.printf(String.format("| %-20s | %-22s |\n", "NOMBRE", "ROL"));
-                    for (CuerpoTecnico cu: cuerpoTecnico.listar()){
-                        if (cu.getIdEquipo() == equipo.getId()){
-                            System.out.println("_________________________________________________");
-                            System.out.printf(String.format("| %-20s | %-22s |\n", cu.getNombre().concat(" ").concat(cu.getApellido()), cu.getRol()));
-                        }
-                    }
-                    System.out.println("_________________________________________________");
-
+                    informe.plantillaCuerpoTecnico(repo, cuerpoTecnico);
                 }
 
                 System.out.print("\nquieres seguir viendo más informes? (y/n): ");
@@ -502,9 +450,7 @@ public class Menus {
                 }
             }
         }
-
 //        equipos.sort((tp1, tp2) -> Integer.compare(tp2.getTp(), tp1.getTp()));
-
         System.out.println("--------------------------------------------------------------------------------");
         System.out.println("| ID \t| PJ \t| PG \t| PP \t| PE \t| GF \t| GC \t| TP \t|  NOMBRE \t\t|");
         System.out.println("--------------------------------------------------------------------------------");
