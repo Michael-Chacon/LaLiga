@@ -1,11 +1,10 @@
 package org.laLiga;
-import org.laLiga.Validacion.Validacion;
-import org.laLiga.servicios.Menus;
-import java.util.Scanner;
+import org.laLiga.console.Console;
+import org.laLiga.console.Menus;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Console console = new Console();
         Menus menu = new Menus();
         int control = 0;
 
@@ -15,7 +14,7 @@ public class Main {
             System.out.println("----------");
 
             System.out.println("Options: \n\t1. Registrar equipo\n\t2. Registrar plantel\n\t3. Registrar juego\n\t4. Informes\n\t5. Tabla\n\t0. Salir");
-            control = Validacion.validarInt("Seleccione una opción: ");
+            control = console.readInt("Seleccione una opción: ");
             if (control == 1){
                 menu.registrarEquipo();
             }else if(control == 2){
@@ -26,7 +25,7 @@ public class Main {
                 menu.informes();
             } else if (control == 5){
                 menu.mostrarEquipos();
-            }            else if (control == 0){
+            } else if (control == 0){
                 break;
             }
         }

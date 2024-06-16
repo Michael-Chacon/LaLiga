@@ -23,7 +23,7 @@ public class Console {
     }
 
     public String readString(String mensaje){
-        System.out.println(mensaje);
+        System.out.print(mensaje);
         return scanner.nextLine();
     }
 
