@@ -26,9 +26,9 @@ public class Menus {
         System.out.println("--------------------------\n");
         registro: while(true){
             int id = team.ultimoid();
-            String nombre = console.readString("Ingrese el nombre del equipo");
+            String nombre = console.readString("Ingrese el nombre del equipo: ");
             team.crear(new Equipo(id, nombre, 0,0,0,0,0,0,0));
-            String option = console.readString("quieres registrar otro equipo?(y/n)");
+            String option = console.readString("quieres registrar otro equipo? (y/n): ");
             if (option.equalsIgnoreCase("n")){
                 break registro;
             }
