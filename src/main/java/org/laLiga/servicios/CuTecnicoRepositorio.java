@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import org.laLiga.abstraccion.Repositorio;
-import org.laLiga.modelo.CuerpoTecnico;
+import org.laLiga.cuerpoTecnico.domain.entities.CuerpoTecnico;
 
 import java.util.ArrayList;
 import java.util.List;

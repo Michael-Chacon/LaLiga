@@ -6,7 +6,7 @@ import org.laLiga.equipo.adapter.out.TeamMySQLRepository;
 import org.laLiga.equipo.application.TeamServices;
 import org.laLiga.modelo.CuerpoMedico;
 import org.laLiga.equipo.domain.entities.Equipo;
-import org.laLiga.modelo.CuerpoTecnico;
+import org.laLiga.cuerpoTecnico.domain.entities.CuerpoTecnico;
 import org.laLiga.modelo.Jugador;
 import org.laLiga.servicios.*;
 

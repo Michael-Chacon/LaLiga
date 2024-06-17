@@ -1,7 +1,7 @@
 package org.laLiga.console;
 
 import org.laLiga.abstraccion.Repositorio;
-import org.laLiga.modelo.CuerpoTecnico;
+import org.laLiga.cuerpoTecnico.domain.entities.CuerpoTecnico;
 import org.laLiga.equipo.domain.entities.Equipo;
 
 public class CoachingStaffConsole {
