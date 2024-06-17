@@ -1,6 +1,6 @@
 package org.laLiga.abstraccion;
 
-import org.laLiga.modelo.Equipo;
+import org.laLiga.equipo.domain.entities.Equipo;
 
 import java.util.List;
 

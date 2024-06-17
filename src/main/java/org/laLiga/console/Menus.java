@@ -1,8 +1,11 @@
 package org.laLiga.console;
 
 import org.laLiga.abstraccion.Repositorio;
+import org.laLiga.equipo.adapter.in.TeamConsoleAdapter;
+import org.laLiga.equipo.adapter.out.TeamMySQLRepository;
+import org.laLiga.equipo.application.TeamServices;
 import org.laLiga.modelo.CuerpoMedico;
-import org.laLiga.modelo.Equipo;
+import org.laLiga.equipo.domain.entities.Equipo;
 import org.laLiga.modelo.CuerpoTecnico;
 import org.laLiga.modelo.Jugador;
 import org.laLiga.servicios.*;
@@ -20,19 +23,25 @@ public class Menus {
     CoachingStaffConsole coachingStaff = new CoachingStaffConsole(cuerpoTecnico);
     MedicalStaffConsole medicalStaff = new MedicalStaffConsole(cuerpoMedico);
 
-    public void registrarEquipo(){
-        System.out.println("--------------------------");
-        System.out.println("** Registro de equipos **");
-        System.out.println("--------------------------\n");
-        registro: while(true){
-            int id = team.ultimoid();
-            String nombre = console.readString("Ingrese el nombre del equipo: ");
-            team.crear(new Equipo(id, nombre, 0,0,0,0,0,0,0));
-            String option = console.readString("quieres registrar otro equipo? (y/n): ");
-            if (option.equalsIgnoreCase("n")){
-                break registro;
-            }
-        }
+//    New objects
+    TeamMySQLRepository teamMySQLRepository = new TeamMySQLRepository("jdbc:mysql://localhost:3306/laLiga", "root", "root");
+    TeamServices teamServices = new TeamServices(teamMySQLRepository);
+    TeamConsoleAdapter teamConsoleAdapter = new TeamConsoleAdapter(teamServices);
+
+    public void showTeamMenu(){
+        teamConsoleAdapter.menuEquipo();
+//        System.out.println("--------------------------");
+//        System.out.println("** Registro de equipos **");
+//        System.out.println("--------------------------\n");
+//        registro: while(true){
+//            int id = team.ultimoid();
+//            String nombre = console.readString("Ingrese el nombre del equipo: ");
+//            team.crear(new Equipo(id, nombre, 0,0,0,0,0,0,0));
+//            String option = console.readString("quieres registrar otro equipo? (y/n): ");
+//            if (option.equalsIgnoreCase("n")){
+//                break registro;
+//            }
+//        }
     }
 
     public void registrarPlantel(){

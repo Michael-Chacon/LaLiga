@@ -1,4 +1,4 @@
-package org.laLiga.modelo;
+package org.laLiga.equipo.domain.entities;
 
 public class Equipo {
     int id;
@@ -18,6 +18,17 @@ public class Equipo {
 
     public Equipo(int id, String nombre, int pj, int pg, int pp, int pe, int gf, int gc, int tp) {
         this.id = id;
+        this.nombre = nombre;
+        this.pj = pj;
+        this.pg = pg;
+        this.pp = pp;
+        this.pe = pe;
+        this.gf = gf;
+        this.gc = gc;
+        this.tp = tp;
+    }
+
+    public Equipo(String nombre, int pj, int pg, int pp, int pe, int gf, int gc, int tp) {
         this.nombre = nombre;
         this.pj = pj;
         this.pg = pg;

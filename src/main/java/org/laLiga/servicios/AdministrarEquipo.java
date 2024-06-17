@@ -5,7 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import org.laLiga.abstraccion.Crud;
-import org.laLiga.modelo.Equipo;
+import org.laLiga.equipo.domain.entities.Equipo;
 import java.util.ArrayList;
 import java.util.List;
 

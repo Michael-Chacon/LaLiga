@@ -1,7 +1,7 @@
 package org.laLiga.console;
 
 import org.laLiga.abstraccion.Repositorio;
-import org.laLiga.modelo.Equipo;
+import org.laLiga.equipo.domain.entities.Equipo;
 import org.laLiga.modelo.Jugador;
 
 public class PlayerConsole {

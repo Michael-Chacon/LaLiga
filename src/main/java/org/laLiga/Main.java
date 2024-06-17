@@ -16,7 +16,7 @@ public class Main {
             System.out.println("Options: \n\t1. Registrar equipo\n\t2. Registrar plantel\n\t3. Registrar juego\n\t4. Informes\n\t5. Tabla\n\t0. Salir");
             control = console.readInt("Seleccione una opción: ");
             if (control == 1){
-                menu.registrarEquipo();
+                menu.showTeamMenu();
             }else if(control == 2){
                 menu.registrarPlantel();
             }else if (control == 3){
