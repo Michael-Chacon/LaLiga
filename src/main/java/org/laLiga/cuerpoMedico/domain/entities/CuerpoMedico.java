@@ -1,4 +1,4 @@
-package org.laLiga.modelo;
+package org.laLiga.cuerpoMedico.domain.entities;
 
 import org.laLiga.abstraccion.Plantel;
 

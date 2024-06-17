@@ -2,7 +2,7 @@ package org.laLiga.console;
 
 import org.laLiga.Validacion.Validacion;
 import org.laLiga.abstraccion.Repositorio;
-import org.laLiga.modelo.CuerpoMedico;
+import org.laLiga.cuerpoMedico.domain.entities.CuerpoMedico;
 import org.laLiga.equipo.domain.entities.Equipo;
 
 public class MedicalStaffConsole {

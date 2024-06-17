@@ -4,7 +4,7 @@ import org.laLiga.abstraccion.Repositorio;
 import org.laLiga.equipo.adapter.in.TeamConsoleAdapter;
 import org.laLiga.equipo.adapter.out.TeamMySQLRepository;
 import org.laLiga.equipo.application.TeamServices;
-import org.laLiga.modelo.CuerpoMedico;
+import org.laLiga.cuerpoMedico.domain.entities.CuerpoMedico;
 import org.laLiga.equipo.domain.entities.Equipo;
 import org.laLiga.cuerpoTecnico.domain.entities.CuerpoTecnico;
 import org.laLiga.modelo.Jugador;
