@@ -30,8 +30,8 @@ public class Menus {
     Repositorio<CuerpoTecnico> cuerpoTecnico = new CuTecnicoRepositorio();
     Console console = new Console();
     PlayerConsole player = new PlayerConsole(jugador);
-    CoachingStaffConsole coachingStaff = new CoachingStaffConsole(cuerpoTecnico);
-    MedicalStaffConsole medicalStaff = new MedicalStaffConsole(cuerpoMedico);
+//    CoachingStaffConsole coachingStaff = new CoachingStaffConsole(cuerpoTecnico);
+//    MedicalStaffConsole medicalStaff = new MedicalStaffConsole(cuerpoMedico);
 
 //    New objects
     TeamMySQLRepository teamMySQLRepository = new TeamMySQLRepository("jdbc:mysql://localhost:3306/laLiga", "root", "root");

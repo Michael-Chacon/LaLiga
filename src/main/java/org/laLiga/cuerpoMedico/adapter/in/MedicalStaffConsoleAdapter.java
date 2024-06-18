@@ -1,11 +1,9 @@
 package org.laLiga.cuerpoMedico.adapter.in;
 
-import org.laLiga.Validacion.Validacion;
 import org.laLiga.console.Console;
 import org.laLiga.cuerpoMedico.application.MedicalStaffService;
 import org.laLiga.cuerpoMedico.domain.entities.CuerpoMedico;
 import org.laLiga.equipo.domain.entities.Equipo;
-
 import java.util.Optional;
 
 public class MedicalStaffConsoleAdapter {
@@ -36,7 +34,7 @@ public class MedicalStaffConsoleAdapter {
             for (int i = 0; i < roles.length; i++){
                 System.out.println(i + ". " + roles[i]);
             }
-            int indice = Validacion.validarInt("Selecciona el rol por el número: ");
+            int indice = console.readInt("Selecciona el rol por el número: ");
             String rol = roles[indice];
 
             medicalStaffService.createMedicalStaff(new CuerpoMedico(nombre, apellido, rol, edad, equipo.get().getId()));

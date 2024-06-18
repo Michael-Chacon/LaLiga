@@ -29,7 +29,9 @@ public class TeamConsoleAdapter {
             switch (choice){
                 case 1:
                     registrarEquipo();
-
+                break;
+                case 6:
+                    break menuEquipo;
             }
         }
     }

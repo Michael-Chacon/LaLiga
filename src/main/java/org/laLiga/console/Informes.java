@@ -1,6 +1,5 @@
 package org.laLiga.console;
 
-import org.laLiga.Validacion.Validacion;
 import org.laLiga.abstraccion.Repositorio;
 import org.laLiga.cuerpoTecnico.domain.entities.CuerpoTecnico;
 import org.laLiga.equipo.domain.entities.Equipo;
@@ -10,6 +9,8 @@ import org.laLiga.servicios.AdministrarEquipo;
 import java.util.List;
 
 public class Informes {
+    
+    Console console = new Console();
     public void masGoles(List<Equipo> listaEquipos){
         Equipo resultado = null;
         for (Equipo equipos : listaEquipos) {
@@ -104,7 +105,7 @@ public class Informes {
         }
         System.out.println("_________________________________");
 
-        int id = Validacion.validarInt("Elige el equipo por el id: ");
+        int id = console.readInt("Elige el equipo por el id: ");
         Equipo equipo = repo.buscarPorId(id);
         System.out.println("Jugadores del " + equipo.getNombre());
         System.out.println("______________________________________________________________________");
@@ -127,7 +128,7 @@ public class Informes {
             System.out.println(String.format("| %4s | %-20s |", equipo.getId(), equipo.getNombre()));
         }
         System.out.println("_________________________________");
-        int id = Validacion.validarInt("Elige el equipo por el id: ");
+        int id = console.readInt("Elige el equipo por el id: ");
         Equipo equipo = repo.buscarPorId(id);
         System.out.println("\nCuerpo técnico del " + equipo.getNombre());
         System.out.println("_________________________________________________");
