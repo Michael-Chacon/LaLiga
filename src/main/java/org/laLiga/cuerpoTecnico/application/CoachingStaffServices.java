@@ -15,23 +15,23 @@ public class CoachingStaffServices {
     }
 
 
-    public void createTeam(CuerpoTecnico cuerpoTecnico){
+    public void createCoachingStaff(CuerpoTecnico cuerpoTecnico){
         this.coachingStaffRepository.save(cuerpoTecnico);
     }
 
-    public void updateTeam(CuerpoTecnico cuerpoTecnico){
+    public void updateCoachingStaff(CuerpoTecnico cuerpoTecnico){
         this.coachingStaffRepository.update(cuerpoTecnico);
     }
 
-    public Optional<CuerpoTecnico> getTeamById(int id){
+    public Optional<CuerpoTecnico> getCoachingStaffById(int id){
         return this.coachingStaffRepository.findById(id);
     }
 
-    public void deletePais(int id){
+    public void deleteCoachingStaff(int id){
         this.coachingStaffRepository.delete(id);
     }
 
-    public List<CuerpoTecnico> getAllTeams(){
+    public List<CuerpoTecnico> getAllCoachingStaff(){
         return this.coachingStaffRepository.findAll();
     }
 }

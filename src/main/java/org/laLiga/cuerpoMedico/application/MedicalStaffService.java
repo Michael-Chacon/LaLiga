@@ -14,23 +14,23 @@ public class MedicalStaffService {
     }
 
 
-    public void createTeam(CuerpoMedico cuerpoMedico){
+    public void createMedicalStaff(CuerpoMedico cuerpoMedico){
         this.medicalStaffRepository.save(cuerpoMedico);
     }
 
-    public void updateTeam(CuerpoMedico cuerpoMedico){
+    public void updateMedicalStaff(CuerpoMedico cuerpoMedico){
         this.medicalStaffRepository.update(cuerpoMedico);
     }
 
-    public Optional<CuerpoMedico> getTeamById(int id){
+    public Optional<CuerpoMedico> getMedicalStaffById(int id){
         return this.medicalStaffRepository.findById(id);
     }
 
-    public void deletePais(int id){
+    public void deleteMedicalStaff(int id){
         this.medicalStaffRepository.delete(id);
     }
 
-    public List<CuerpoMedico> getAllTeams(){
+    public List<CuerpoMedico> getAllMedicalStaff(){
         return this.medicalStaffRepository.findAll();
     }
 }

@@ -4,7 +4,7 @@ import org.laLiga.Validacion.Validacion;
 import org.laLiga.abstraccion.Repositorio;
 import org.laLiga.cuerpoTecnico.domain.entities.CuerpoTecnico;
 import org.laLiga.equipo.domain.entities.Equipo;
-import org.laLiga.modelo.Jugador;
+import org.laLiga.jugador.domain.entities.Jugador;
 import org.laLiga.servicios.AdministrarEquipo;
 
 import java.util.List;

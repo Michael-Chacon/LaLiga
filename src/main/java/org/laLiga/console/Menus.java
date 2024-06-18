@@ -7,7 +7,7 @@ import org.laLiga.equipo.application.TeamServices;
 import org.laLiga.cuerpoMedico.domain.entities.CuerpoMedico;
 import org.laLiga.equipo.domain.entities.Equipo;
 import org.laLiga.cuerpoTecnico.domain.entities.CuerpoTecnico;
-import org.laLiga.modelo.Jugador;
+import org.laLiga.jugador.domain.entities.Jugador;
 import org.laLiga.servicios.*;
 
 import java.util.List;

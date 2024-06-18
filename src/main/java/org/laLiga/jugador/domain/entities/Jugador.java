@@ -1,4 +1,4 @@
-package org.laLiga.modelo;
+package org.laLiga.jugador.domain.entities;
 import org.laLiga.abstraccion.Plantel;
 
 import java.time.LocalDate;
@@ -22,6 +22,17 @@ public class Jugador extends Plantel {
         this.posicionJuego = posicionJuego;
         this.nacionalidad = nacionalidad;
         this.fechaIngreso = fechaIngreso;
+    }
+
+    public Jugador(int id, String nombre, String apellido, int edad, int idEquipo, int dorsal, String posicionJuego, String nacionalidad, String fechaIngreso, int golesAnotados, int tarjetasRojas, int tarjetasAmarillas) {
+        super(id, nombre, apellido, edad, idEquipo);
+        this.dorsal = dorsal;
+        this.posicionJuego = posicionJuego;
+        this.nacionalidad = nacionalidad;
+        this.fechaIngreso = fechaIngreso;
+        this.golesAnotados = golesAnotados;
+        this.tarjetasRojas = tarjetasRojas;
+        this.tarjetasAmarillas = tarjetasAmarillas;
     }
 
     public int getDorsal() {
