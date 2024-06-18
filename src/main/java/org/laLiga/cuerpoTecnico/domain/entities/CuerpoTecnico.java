@@ -11,4 +11,7 @@ public class CuerpoTecnico extends Plantel {
         super(id, nombre, apellido, rol, edad, idEquipo);
     }
 
+    public CuerpoTecnico(String nombre, String apellido, String rol, int edad, int idEquipo) {
+        super(nombre, apellido, rol, edad, idEquipo);
+    }
 }

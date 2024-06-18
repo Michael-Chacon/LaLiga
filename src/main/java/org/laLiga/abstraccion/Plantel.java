@@ -20,18 +20,25 @@ public class Plantel {
         this.idEquipo = idEquipo;
     }
 
-    public Plantel(int id, String nombre, String apellido, int edad, int idEquipo) {
-        this.id = id;
+    public Plantel(String nombre, String apellido, String rol, int edad, int idEquipo) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.rol = rol;
+        this.edad = edad;
+        this.idEquipo = idEquipo;
+    }
+
+    public Plantel(String nombre, String apellido, int edad, int idEquipo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
         this.idEquipo = idEquipo;
     }
 
-    public Plantel(String nombre, String apellido, String rol, int edad, int idEquipo) {
+    public Plantel(int id, String nombre, String apellido, int edad, int idEquipo) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.rol = rol;
         this.edad = edad;
         this.idEquipo = idEquipo;
     }

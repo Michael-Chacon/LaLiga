@@ -4,6 +4,9 @@ import org.laLiga.abstraccion.Repositorio;
 import org.laLiga.cuerpoMedico.adapter.in.MedicalStaffConsoleAdapter;
 import org.laLiga.cuerpoMedico.adapter.out.MedicalStaffMySQLRepository;
 import org.laLiga.cuerpoMedico.application.MedicalStaffService;
+import org.laLiga.cuerpoTecnico.adapter.in.CoachingStaffConsoleAdapter;
+import org.laLiga.cuerpoTecnico.adapter.out.CoachingStaffMySQLRepository;
+import org.laLiga.cuerpoTecnico.application.CoachingStaffServices;
 import org.laLiga.equipo.adapter.in.TeamConsoleAdapter;
 import org.laLiga.equipo.adapter.out.TeamMySQLRepository;
 import org.laLiga.equipo.application.TeamServices;
@@ -38,6 +41,15 @@ public class Menus {
     MedicalStaffMySQLRepository medicalStaffMySQLRepository = new MedicalStaffMySQLRepository("jdbc:mysql://localhost:3306/laLiga", "root", "root");
     MedicalStaffService medicalStaffService = new MedicalStaffService(medicalStaffMySQLRepository);
     MedicalStaffConsoleAdapter medicalStaffConsoleAdapter = new MedicalStaffConsoleAdapter(medicalStaffService);
+//   Coaching staff module
+    CoachingStaffMySQLRepository coachingStaffMySQLRepository = new CoachingStaffMySQLRepository("jdbc:mysql://localhost:3306/laLiga", "root", "root");
+    CoachingStaffServices coachingStaffServices = new CoachingStaffServices(coachingStaffMySQLRepository);
+    CoachingStaffConsoleAdapter coachingStaffConsoleAdapter = new CoachingStaffConsoleAdapter(coachingStaffServices);
+//  Player module
+    PlayerMySQLRepository playerMySQLRepository = new PlayerMySQLRepository("jdbc:mysql://localhost:3306/laLiga", "root", "root");
+    PlayerService playerService = new PlayerService(playerMySQLRepository);
+    PlayerConsoleAdapter playerConsoleAdapter =  new PlayerConsoleAdapter(playerService);
+
     public void showTeamMenu(){
         teamConsoleAdapter.menuEquipo();
     }
@@ -59,13 +71,21 @@ public class Menus {
 
         int idEQuipo = console.readInt("Seleccione el id: ");
         Optional<Equipo> equipoSeleccionado = teamServices.getTeamById(idEQuipo);
+//        final int[] idd = new int[1];
+//        equipoSeleccionado.ifPresentOrElse(
+//                e -> {
+//                    System.out.println("Si existe");
+//                    idd[0] = e.getId();
+//                },
+//                () -> System.out.println("No existe")
+//        );
 
         int rol = console.readInt("Que rol quiere registrar:\n\t1. Jugador\n\t2. Cuerpo técnico\n\t3. Cuerpo medico\n");
 
         if (rol == 1){
-//            player.registrarJugador(equipoSeleccionado, console);
+            playerConsoleAdapter.registrarJugador(equipoSeleccionado, console);
         } else if (rol == 2){
-//            coachingStaff.registrarCuTecnico(equipoSeleccionado, console);
+            coachingStaffConsoleAdapter.registrarCuTecnico(equipoSeleccionado, console);
         } else if (rol == 3) {
             medicalStaffConsoleAdapter.registrarCuMedico(equipoSeleccionado, console);
         }

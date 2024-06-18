@@ -22,7 +22,7 @@ public class PlayerMySQLRepository implements PlayerRepository {
     @Override
     public void save(Jugador jugador) {
         try(Connection connection = DriverManager.getConnection(url, user, password)){
-            String query = "INSERT INTO jugador (nombre, apellido, edad, idEquipo, dorsal, posicionJuego, nacionalidad, fechaIngreso) VALUES (?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO jugador (nombreJugador, apellidoJugador, edadJugador, idEquipo, dorsal, posicion, nacionalidad, fechaIngreso) VALUES (?,?,?,?,?,?,?,?)";
             try(PreparedStatement stm = connection.prepareStatement(query)){
                 stm.setString(1, jugador.getNombre());
                 stm.setString(2, jugador.getApellido());
@@ -44,7 +44,7 @@ public class PlayerMySQLRepository implements PlayerRepository {
     @Override
     public void update(Jugador jugador) {
         try(Connection connection = DriverManager.getConnection(url, user, password)){
-            String query = "UPDATE jugador SET nombre = ?, apellido = ?, edad = ?, idEquipo = ?, dorsal = ?, posicionJuego = ?, nacionalidad = ?, fechaIngreso = ? WHERE id = ?";
+            String query = "UPDATE jugador SET nombreJugador = ?, apellidoJugador = ?, edadJugador = ?, idEquipo = ?, dorsal = ?, posicion = ?, nacionalidad = ?, fechaIngreso = ? WHERE id = ?";
             try(PreparedStatement stm = connection.prepareStatement(query)){
                 stm.setString(1, jugador.getNombre());
                 stm.setString(2, jugador.getApellido());

@@ -60,7 +60,7 @@ public class PlayerConsole {
 
             String fechaIngreso = console.readString("Fecha de ingreso, formato dd-mm-yyyy: ");
 
-            player.addObject(new Jugador(idJugador, nombre, apellido, edad, equipo.getId(), dorsal, posicion, nacionalidad, fechaIngreso));
+//            player.addObject(new Jugador(idJugador, nombre, apellido, edad, equipo.getId(), dorsal, posicion, nacionalidad, fechaIngreso));
 
             String option = console.readString("quieres registrar otro player? (y/n): ");
             if (option.equalsIgnoreCase("n")){

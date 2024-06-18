@@ -16,14 +16,6 @@ public class Jugador extends Plantel {
     public Jugador() {
     }
 
-    public Jugador(int id, String nombre, String apellido, int edad, int idEquipo, int dorsal, String posicionJuego, String nacionalidad, String fechaIngreso) {
-        super(id, nombre, apellido, edad, idEquipo);
-        this.dorsal = dorsal;
-        this.posicionJuego = posicionJuego;
-        this.nacionalidad = nacionalidad;
-        this.fechaIngreso = fechaIngreso;
-    }
-
     public Jugador(int id, String nombre, String apellido, int edad, int idEquipo, int dorsal, String posicionJuego, String nacionalidad, String fechaIngreso, int golesAnotados, int tarjetasRojas, int tarjetasAmarillas) {
         super(id, nombre, apellido, edad, idEquipo);
         this.dorsal = dorsal;
@@ -33,6 +25,14 @@ public class Jugador extends Plantel {
         this.golesAnotados = golesAnotados;
         this.tarjetasRojas = tarjetasRojas;
         this.tarjetasAmarillas = tarjetasAmarillas;
+    }
+
+    public Jugador(String nombre, String apellido, int edad, int idEquipo, int dorsal, String posicionJuego, String nacionalidad, String fechaIngreso) {
+        super(nombre, apellido, edad, idEquipo);
+        this.dorsal = dorsal;
+        this.posicionJuego = posicionJuego;
+        this.nacionalidad = nacionalidad;
+        this.fechaIngreso = fechaIngreso;
     }
 
     public int getDorsal() {
