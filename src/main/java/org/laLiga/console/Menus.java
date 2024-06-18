@@ -1,16 +1,23 @@
 package org.laLiga.console;
 
 import org.laLiga.abstraccion.Repositorio;
+import org.laLiga.cuerpoMedico.adapter.in.MedicalStaffConsoleAdapter;
+import org.laLiga.cuerpoMedico.adapter.out.MedicalStaffMySQLRepository;
+import org.laLiga.cuerpoMedico.application.MedicalStaffService;
 import org.laLiga.equipo.adapter.in.TeamConsoleAdapter;
 import org.laLiga.equipo.adapter.out.TeamMySQLRepository;
 import org.laLiga.equipo.application.TeamServices;
 import org.laLiga.cuerpoMedico.domain.entities.CuerpoMedico;
 import org.laLiga.equipo.domain.entities.Equipo;
 import org.laLiga.cuerpoTecnico.domain.entities.CuerpoTecnico;
+import org.laLiga.jugador.adapter.in.PlayerConsoleAdapter;
+import org.laLiga.jugador.adapter.out.PlayerMySQLRepository;
+import org.laLiga.jugador.application.PlayerService;
 import org.laLiga.jugador.domain.entities.Jugador;
 import org.laLiga.servicios.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Menus {
 
@@ -27,21 +34,12 @@ public class Menus {
     TeamMySQLRepository teamMySQLRepository = new TeamMySQLRepository("jdbc:mysql://localhost:3306/laLiga", "root", "root");
     TeamServices teamServices = new TeamServices(teamMySQLRepository);
     TeamConsoleAdapter teamConsoleAdapter = new TeamConsoleAdapter(teamServices);
-
+//   Medical staff module
+    MedicalStaffMySQLRepository medicalStaffMySQLRepository = new MedicalStaffMySQLRepository("jdbc:mysql://localhost:3306/laLiga", "root", "root");
+    MedicalStaffService medicalStaffService = new MedicalStaffService(medicalStaffMySQLRepository);
+    MedicalStaffConsoleAdapter medicalStaffConsoleAdapter = new MedicalStaffConsoleAdapter(medicalStaffService);
     public void showTeamMenu(){
         teamConsoleAdapter.menuEquipo();
-//        System.out.println("--------------------------");
-//        System.out.println("** Registro de equipos **");
-//        System.out.println("--------------------------\n");
-//        registro: while(true){
-//            int id = team.ultimoid();
-//            String nombre = console.readString("Ingrese el nombre del equipo: ");
-//            team.crear(new Equipo(id, nombre, 0,0,0,0,0,0,0));
-//            String option = console.readString("quieres registrar otro equipo? (y/n): ");
-//            if (option.equalsIgnoreCase("n")){
-//                break registro;
-//            }
-//        }
     }
 
     public void registrarPlantel(){
@@ -50,7 +48,7 @@ public class Menus {
         System.out.println("----------------------------------\n");
         System.out.println("Seleccione por el id al equipo para registra empleados en él");
 
-        List<Equipo> equipos = team.listar();
+        List<Equipo> equipos = teamServices.getAllTeams();
         System.out.println("_______________________________");
         System.out.println(String.format("| %-5s | %-20s |", "ID", "NOMBRE"));
         equipos.forEach(equipo -> {
@@ -60,16 +58,16 @@ public class Menus {
         System.out.println("_______________________________");
 
         int idEQuipo = console.readInt("Seleccione el id: ");
-        Equipo equipoSeleccionado = team.buscarPorId(idEQuipo);
+        Optional<Equipo> equipoSeleccionado = teamServices.getTeamById(idEQuipo);
 
         int rol = console.readInt("Que rol quiere registrar:\n\t1. Jugador\n\t2. Cuerpo técnico\n\t3. Cuerpo medico\n");
 
         if (rol == 1){
-            player.registrarJugador(equipoSeleccionado, console);
+//            player.registrarJugador(equipoSeleccionado, console);
         } else if (rol == 2){
-            coachingStaff.registrarCuTecnico(equipoSeleccionado, console);
+//            coachingStaff.registrarCuTecnico(equipoSeleccionado, console);
         } else if (rol == 3) {
-            medicalStaff.registrarCuMedico(equipoSeleccionado, console);
+            medicalStaffConsoleAdapter.registrarCuMedico(equipoSeleccionado, console);
         }
     }
     

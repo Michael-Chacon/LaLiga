@@ -28,6 +28,14 @@ public class Plantel {
         this.idEquipo = idEquipo;
     }
 
+    public Plantel(String nombre, String apellido, String rol, int edad, int idEquipo) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.rol = rol;
+        this.edad = edad;
+        this.idEquipo = idEquipo;
+    }
+
     public int getId() {
         return id;
     }
