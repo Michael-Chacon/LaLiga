@@ -19,25 +19,36 @@ public class TeamMySQLRepository implements TeamRepository {
     }
 
     @Override
-    public void save(Equipo equipo) {
+    public int save(Equipo equipo) {
+        ResultSet getId = null;
+        PreparedStatement preparedStatement = null;
         try(Connection connection = DriverManager.getConnection(url, user, password)){
             String query = "INSERT INTO equipo (nombreEquip, pj, pg, pp, pe, gf, gc, tp) VALUES (?,?,?,?,?,?,?,?)";
-            try(PreparedStatement stm = connection.prepareStatement(query)){
-                stm.setString(1, equipo.getNombre());
-                stm.setInt(2, equipo.getPj());
-                stm.setInt(3, equipo.getPg());
-                stm.setInt(4, equipo.getPp());
-                stm.setInt(5, equipo.getPe());
-                stm.setInt(6, equipo.getGf());
-                stm.setInt(7, equipo.getGc());
-                stm.setInt(8, equipo.getTp());
+            preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+                preparedStatement.setString(1, equipo.getNombre());
+                preparedStatement.setInt(2, equipo.getPj());
+                preparedStatement.setInt(3, equipo.getPg());
+                preparedStatement.setInt(4, equipo.getPp());
+                preparedStatement.setInt(5, equipo.getPe());
+                preparedStatement.setInt(6, equipo.getGf());
+                preparedStatement.setInt(7, equipo.getGc());
+                preparedStatement.setInt(8, equipo.getTp());
 
-                stm.executeUpdate();
-            }
+                int idEquipo = preparedStatement.executeUpdate();
+                if (idEquipo > 0) {
+                    getId = preparedStatement.getGeneratedKeys();
+                    if (getId.next()) {
+                        int equipoId = getId.getInt(1);
+                        System.out.println("El id es: " + equipoId);
+                        return equipoId;
+                    } else {
+                        System.out.println("No obtuve ningun id");
+                    }
+                }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        return 0;
     }
 
     @Override

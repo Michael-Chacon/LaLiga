@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface TeamRepository {
 
-    void save(Equipo equipo);
+    int save(Equipo equipo);
     void update(Equipo equipo);
     Optional<Equipo> findById(int id);
     List<Equipo> findAll();

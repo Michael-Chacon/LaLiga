@@ -8,6 +8,7 @@ import org.laLiga.cuerpoTecnico.adapter.in.CoachingStaffConsoleAdapter;
 import org.laLiga.cuerpoTecnico.adapter.out.CoachingStaffMySQLRepository;
 import org.laLiga.cuerpoTecnico.application.CoachingStaffServices;
 import org.laLiga.equipo.adapter.in.TeamConsoleAdapter;
+import org.laLiga.equipo.adapter.in.TeamMatchConsoleAdapter;
 import org.laLiga.equipo.adapter.out.TeamMySQLRepository;
 import org.laLiga.equipo.application.TeamServices;
 import org.laLiga.cuerpoMedico.domain.entities.CuerpoMedico;
@@ -33,10 +34,8 @@ public class Menus {
 //    CoachingStaffConsole coachingStaff = new CoachingStaffConsole(cuerpoTecnico);
 //    MedicalStaffConsole medicalStaff = new MedicalStaffConsole(cuerpoMedico);
 
-//    New objects
-    TeamMySQLRepository teamMySQLRepository = new TeamMySQLRepository("jdbc:mysql://localhost:3306/laLiga", "root", "root");
-    TeamServices teamServices = new TeamServices(teamMySQLRepository);
-    TeamConsoleAdapter teamConsoleAdapter = new TeamConsoleAdapter(teamServices);
+
+//    TeamMatchConsoleAdapter teamMatch = new TeamMatchConsoleAdapter(teamServices);
 //   Medical staff module
     MedicalStaffMySQLRepository medicalStaffMySQLRepository = new MedicalStaffMySQLRepository("jdbc:mysql://localhost:3306/laLiga", "root", "root");
     MedicalStaffService medicalStaffService = new MedicalStaffService(medicalStaffMySQLRepository);
@@ -49,6 +48,10 @@ public class Menus {
     PlayerMySQLRepository playerMySQLRepository = new PlayerMySQLRepository("jdbc:mysql://localhost:3306/laLiga", "root", "root");
     PlayerService playerService = new PlayerService(playerMySQLRepository);
     PlayerConsoleAdapter playerConsoleAdapter =  new PlayerConsoleAdapter(playerService);
+    //    New objects
+    TeamMySQLRepository teamMySQLRepository = new TeamMySQLRepository("jdbc:mysql://localhost:3306/laLiga", "root", "root");
+    TeamServices teamServices = new TeamServices(teamMySQLRepository, playerMySQLRepository);
+    TeamConsoleAdapter teamConsoleAdapter = new TeamConsoleAdapter(teamServices);
 
     public void showTeamMenu(){
         teamConsoleAdapter.menuEquipo();
@@ -94,60 +97,62 @@ public class Menus {
     
 
     public void fecha(){
-        List<Equipo> obtenerEquipos = team.listar();
-        int totalEquipos = obtenerEquipos.size();
-
-        if (totalEquipos <= 1){
-            System.out.println("\n-------------------------------------------------------");
-            System.out.println("** No hay suficientes equipos para iniciar el torneo **");
-            System.out.println("-------------------------------------------------------\n");
-        }else{
-            System.out.println("--------------------------");
-            System.out.println("** Registro de partidos **");
-            System.out.println("--------------------------\n");
-            System.out.println("----------------------");
-            System.out.println("| ID \t| NOMBRE");
-            System.out.println("----------------------");
-            List<Equipo> equipos = team.listar();
-            equipos.sort((tp1, tp2) -> Integer.compare(tp1.getId(), tp2.getId()));
-            equipos.forEach(equipo -> {
-                System.out.println("| " + equipo.getId() + " \t| " + equipo.getNombre());
-            });
-            System.out.println("----------------------");
-            System.out.println();
-
-            int local = console.readInt("Escriba el id del equipo que jugó de local: ");
-            Equipo equipoLocal = team.buscarPorId(local);
-            int golesLocal = console.readInt("Cuantos goles hizo " + equipoLocal.getNombre() + ": ");
-
-            if (golesLocal > 0){
-                player.recordPlayerGoal(golesLocal, equipoLocal, console);
-            }
-
-            String opcion = console.readString("¿Hubo tarjeta para algún jugador del "+ equipoLocal.getNombre() +" (y/n)");
-            if (opcion.equals("y")){
-                player.recordPlayerCard(equipoLocal, console);
-            }
-
-            int visitante = console.readInt("Escriba el id del equipo que jugó de Visitante: ");
-            Equipo equipoVisitante = team.buscarPorId(visitante);
-            int golesVisitante = console.readInt("Cuantos goles hizo " + equipoVisitante.getNombre()+ ": ");
-
-            if (golesLocal > golesVisitante || golesLocal == golesVisitante) {
-                team.registraCombate(equipoLocal, equipoVisitante, golesLocal, golesVisitante);
-            }else{
-                team.registraCombate(equipoVisitante, equipoLocal, golesVisitante, golesLocal);
-            }
-
-            if (golesVisitante > 0){
-                player.recordPlayerGoal(golesVisitante, equipoVisitante, console);
-            }
-
-            String opcionVisitante = console.readString("¿Hubo tarjeta para algún jugador del "+ equipoVisitante.getNombre() +" (y/n): ");
-            if (opcionVisitante.equals("y")){
-                player.recordPlayerCard(equipoVisitante, console);
-            }
-        }
+        teamConsoleAdapter.match();
+//        teamMatch.match(teamConsoleAdapter, playerConsoleAdapter, console);
+//        List<Equipo> obtenerEquipos = team.listar();
+//        int totalEquipos = obtenerEquipos.size();
+//
+//        if (totalEquipos <= 1){
+//            System.out.println("\n-------------------------------------------------------");
+//            System.out.println("** No hay suficientes equipos para iniciar el torneo **");
+//            System.out.println("-------------------------------------------------------\n");
+//        }else{
+//            System.out.println("--------------------------");
+//            System.out.println("** Registro de partidos **");
+//            System.out.println("--------------------------\n");
+//            System.out.println("----------------------");
+//            System.out.println("| ID \t| NOMBRE");
+//            System.out.println("----------------------");
+//            List<Equipo> equipos = team.listar();
+//            equipos.sort((tp1, tp2) -> Integer.compare(tp1.getId(), tp2.getId()));
+//            equipos.forEach(equipo -> {
+//                System.out.println("| " + equipo.getId() + " \t| " + equipo.getNombre());
+//            });
+//            System.out.println("----------------------");
+//            System.out.println();
+//
+//            int local = console.readInt("Escriba el id del equipo que jugó de local: ");
+//            Equipo equipoLocal = team.buscarPorId(local);
+//            int golesLocal = console.readInt("Cuantos goles hizo " + equipoLocal.getNombre() + ": ");
+//
+//            if (golesLocal > 0){
+//                player.recordPlayerGoal(golesLocal, equipoLocal, console);
+//            }
+//
+//            String opcion = console.readString("¿Hubo tarjeta para algún jugador del "+ equipoLocal.getNombre() +" (y/n)");
+//            if (opcion.equals("y")){
+//                player.recordPlayerCard(equipoLocal, console);
+//            }
+//
+//            int visitante = console.readInt("Escriba el id del equipo que jugó de Visitante: ");
+//            Equipo equipoVisitante = team.buscarPorId(visitante);
+//            int golesVisitante = console.readInt("Cuantos goles hizo " + equipoVisitante.getNombre()+ ": ");
+//
+//            if (golesLocal > golesVisitante || golesLocal == golesVisitante) {
+//                team.registraCombate(equipoLocal, equipoVisitante, golesLocal, golesVisitante);
+//            }else{
+//                team.registraCombate(equipoVisitante, equipoLocal, golesVisitante, golesLocal);
+//            }
+//
+//            if (golesVisitante > 0){
+//                player.recordPlayerGoal(golesVisitante, equipoVisitante, console);
+//            }
+//
+//            String opcionVisitante = console.readString("¿Hubo tarjeta para algún jugador del "+ equipoVisitante.getNombre() +" (y/n): ");
+//            if (opcionVisitante.equals("y")){
+//                player.recordPlayerCard(equipoVisitante, console);
+//            }
+//        }
     }
 
     public void informes(){
