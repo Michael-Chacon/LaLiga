@@ -42,4 +42,11 @@ public class TeamServices {
     public List<Jugador> getAllPlayers(){
         return playerRepository.findAll();
     }
+    public Optional<Jugador> getPlayerById(int id){
+        return playerRepository.findById(id);
+    }
+
+    public void updatePlayer(Jugador jugador){
+        playerRepository.update(jugador);
+    }
 }

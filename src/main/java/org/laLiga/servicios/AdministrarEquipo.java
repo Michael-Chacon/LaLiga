@@ -106,6 +106,5 @@ public class AdministrarEquipo implements Crud {
         }
         this.updateTeam(ganador);
         this.updateTeam(perdedor);
-
     }
 }

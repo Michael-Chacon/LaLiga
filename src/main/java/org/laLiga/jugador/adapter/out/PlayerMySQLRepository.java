@@ -44,7 +44,7 @@ public class PlayerMySQLRepository implements PlayerRepository {
     @Override
     public void update(Jugador jugador) {
         try(Connection connection = DriverManager.getConnection(url, user, password)){
-            String query = "UPDATE jugador SET nombreJugador = ?, apellidoJugador = ?, edadJugador = ?, idEquipo = ?, dorsal = ?, posicion = ?, nacionalidad = ?, fechaIngreso = ? WHERE id = ?";
+            String query = "UPDATE jugador SET nombreJugador = ?, apellidoJugador = ?, edadJugador = ?, idEquipo = ?, dorsal = ?, posicion = ?, nacionalidad = ?, fechaIngreso = ?, golesAnotados = ?, tarjetasRojas = ?, tarjetasAmarillas = ? WHERE id = ?";
             try(PreparedStatement stm = connection.prepareStatement(query)){
                 stm.setString(1, jugador.getNombre());
                 stm.setString(2, jugador.getApellido());
@@ -54,7 +54,10 @@ public class PlayerMySQLRepository implements PlayerRepository {
                 stm.setString(6, jugador.getPosicionJuego());
                 stm.setString(7, jugador.getNacionalidad());
                 stm.setString(8, jugador.getFechaIngreso());
-                stm.setInt(9, jugador.getId());
+                stm.setInt(9, jugador.getGolesAnotados());
+                stm.setInt(10, jugador.getTarjetasRojas());
+                stm.setInt(11, jugador.getTarjetasAmarillas());
+                stm.setInt(12, jugador.getId());
                 stm.executeUpdate();
             }
         } catch (SQLException e) {
